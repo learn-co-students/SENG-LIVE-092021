@@ -1,6 +1,6 @@
 # JavaScript Data Types and Variables
 
-### Goals
+### Learning Goals
 - Utilizing `console.log()` for testing
 - Identify JS Data Types
 - Define variables using let vs const 
