@@ -1,67 +1,65 @@
-
-
 // -------------------------------------------
 
 console.log("Check Your Answers Here!");
+console.log("------------------------");
 
 // 🚧 Break Out Activity 1: Using let vs. const
 
-// Properly declare "x" using "const"
+    // Properly declare "x" using "const"
 
-    const x;
+    // const x;
 
     const x = 5;
 
-    const x;
+    // const x;
 
     console.log(`Success! x = ${x}`);
 
-// Properly declare "y" using "let"
+    // Properly declare "y" using "let"
 
     // 🚨 Uncomment the code below to continue:
 
     // let y;
 
-    // let y = 5; 
+    let y = 5; 
 
     // let y;
 
-    // console.log(`Success! y = ${y}`);
+    console.log(`Success! y = ${y}`);
 
-// Refactor the code below to get a successful response in console
+    // Refactor the code below to get a successful response in console
 
     // 🚨 Uncomment the code below to continue:
 
-    // const a = 2;
+    const a = 2;
     
     // a = 2;
     
     // let b;
     
-    // let b = 4
+    let b = 4
     
-    // console.log(`Success! ${a} + ${a} = ${b}`);
+    console.log(`Success! ${a} + ${a} = ${b}`);
 
 // 🚧 Break Out Activity 2: Using if...else
 
     // 🚨 Uncomment the code below to continue:
 
     // 🚧 Set a value for "time" between 0 and 24
-    // let time;
+    let time = 12
 
-    // 💡 If "time" is less than or equal to 12...
-    // if (❓) {
-
-        // console.log(`${time} is in the AM.`)
-
+    // 💡 If "time" is less than or equal to 11...
+    if (time <= 11) {
+        console.log(`${time} is in the AM.`)
+    
     // 💡 In all other cases...
-    // } else {
-
-        // console.log(`${time} is in the PM.`)
-
-    // }
+    } else {
+        console.log(`${time} is in the PM.`)
+    }
 
     // ✨ BONUS: Try refactoring the above expression using a ternary operator.
+
+    { time <= 11 ? console.log(`${time} is in the AM.`) : console.log(`${time} is in the PM.`) }
 
 // 🚧 Break Out Activity 3: Using if...else...if
 
@@ -79,15 +77,23 @@ console.log("Check Your Answers Here!");
     // 🚨 Uncomment the code below to continue
 
     // 🚨 Assign a value to "marks" between 0 and 100
-    // let marks;
+    let marks = 100;
 
     // 🚨 Format your if...else if...else conditional below
-    // if () {
-
-    // } else if () {
-
-    // ...
-    
-    // } else {
-
-    // }
+    if(marks > 90) {
+        console.log("AA");
+    } else if (marks > 80) {
+        console.log("AB")
+    } else if (marks > 70) {
+        console.log("BB")
+    } else if (marks > 60) {
+        console.log("BC")
+    } else if (marks > 50) {
+        console.log("CC")
+    } else if (marks > 40) {
+        console.log("CD")
+    } else if (marks > 30) {
+        console.log("DD")
+    } else {
+        console.log("FF")
+    }
