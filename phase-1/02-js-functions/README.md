@@ -1,5 +1,7 @@
 # JavaScript Functions
 
+# JavaScript Functions
+
 ### Learning Goals
 
 &emsp; ✅ Explore why functions are important in JS
@@ -18,5 +20,6 @@
 
 ### Resources
 
-- [Do Not Fear The White Space in Your Code](https://dev.to/suckup_de/do-not-fear-the-white-space-in-your-code-39d0)
-- [Higher-Order JS Functions & Iterators](https://www.codecademy.com/learn/game-dev-learn-javascript-higher-order-functions-and-iterators/modules/game-dev-learn-javascript-iterators/cheatsheet)
+&emsp; [Do Not Fear The White Space in Your Code](https://dev.to/suckup_de/do-not-fear-the-white-space-in-your-code-39d0)
+
+&emsp; [Higher-Order JS Functions & Iterators](https://www.codecademy.com/learn/game-dev-learn-javascript-higher-order-functions-and-iterators/modules/game-dev-learn-javascript-iterators/cheatsheet)
