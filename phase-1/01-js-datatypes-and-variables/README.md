@@ -1,10 +1,14 @@
 # JavaScript Data Types and Variables
 
 ### Learning Goals
-- Utilizing `console.log()` for testing
-- Identify JS Data Types
-- Define variables using let vs const 
-- Practice conditional statements 
+
+&emsp; ✅ Utilize `console.log()` for testing
+
+&emsp; ✅ Identify JS Data Types
+
+&emsp; ✅ Define variables using let vs const 
+
+&emsp; ✅ Practice conditional statements 
 
 #### Identify JS Data Types 
 - What are the 8 data types used in JS?

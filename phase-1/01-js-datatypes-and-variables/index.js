@@ -1,24 +1,24 @@
-
-
-// -------------------------------------------
-
-console.log("Check Your Answers Here!");
+console.log("------------------------");
+console.log("⬇️ Break Out Activites ⬇️");
+console.log("🚨 Comment Out Lecture Code Above Before Starting 🚨");
+console.log("💡 Use console.log() To Check Answers 💡");
+console.log("------------------------");
 
 // 🚧 Break Out Activity 1: Using let vs. const
 
 // Properly declare "x" using "const"
 
-    const x;
+    // const x;
 
-    const x = 5;
+    // const x = 5;
 
-    const x;
+    // const x;
 
-    console.log(`Success! x = ${x}`);
+    // console.log(`Success! x = ${x}`);
+    
+    // 🚨 Be sure to comment out any code above before proceeding to the next activity.
 
 // Properly declare "y" using "let"
-
-    // 🚨 Uncomment the code below to continue:
 
     // let y;
 
@@ -28,9 +28,9 @@ console.log("Check Your Answers Here!");
 
     // console.log(`Success! y = ${y}`);
 
-// Refactor the code below to get a successful response in console
+    // 🚨 Be sure to comment out any code above before proceeding to the next activity.
 
-    // 🚨 Uncomment the code below to continue:
+// Refactor the code below to get a successful response in console
 
     // const a = 2;
     
@@ -42,19 +42,19 @@ console.log("Check Your Answers Here!");
     
     // console.log(`Success! ${a} + ${a} = ${b}`);
 
-// 🚧 Break Out Activity 2: Using if...else
+    // 🚨 Be sure to comment out any code above before proceeding to the next activity.
 
-    // 🚨 Uncomment the code below to continue:
+// 🚧 Break Out Activity 2: Using if...else
 
     // 🚧 Set a value for "time" between 0 and 24
     // let time;
 
-    // 💡 If "time" is less than or equal to 12...
+    // If "time" is less than or equal to 12...
     // if (❓) {
 
         // console.log(`${time} is in the AM.`)
 
-    // 💡 In all other cases...
+    // In all other cases...
     // } else {
 
         // console.log(`${time} is in the PM.`)
@@ -62,6 +62,8 @@ console.log("Check Your Answers Here!");
     // }
 
     // ✨ BONUS: Try refactoring the above expression using a ternary operator.
+
+    // 🚨 Be sure to comment out any code above before proceeding to the next activity.
 
 // 🚧 Break Out Activity 3: Using if...else...if
 
@@ -76,18 +78,17 @@ console.log("Check Your Answers Here!");
     // - "DD" if marks is greater than 30 and less than or equal to 40.
     // - "FF" if marks is less than or equal to 30.
 
-    // 🚨 Uncomment the code below to continue
-
     // 🚨 Assign a value to "marks" between 0 and 100
-    // let marks;
+    
+        // let marks;
 
     // 🚨 Format your if...else if...else conditional below
-    // if () {
-
-    // } else if () {
-
-    // ...
     
-    // } else {
-
-    // }
+        // if (❓) {
+        // ... 
+        // } else if (❓) {
+        // ...
+        // ...
+        // } else {
+        // ...
+        // }
