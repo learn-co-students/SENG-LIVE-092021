@@ -33,7 +33,7 @@
     // now invoke the function and pass in an argument
 
 
-// ✅ First Class (Higher Order) Functions
+// ✅ Higher-Order Functions
 
     // store a function inside of a variable
 
@@ -79,7 +79,7 @@ console.log("------------------------");
     // 🚨 Be sure to comment out any code above before proceeding to the next activity.
 
 
-// 🚧 Break Out Activity 2: Creating / Implementing First Class (Higher Order) Functions
+// 🚧 Break Out Activity 2: Creating / Implementing Higher-Order Functions
 
     // ❗ Define a function, compareFunctions(), that will be passed two parameterless functions, 
     // first and second. compareFunctions() should call each function and return a string indicating 
