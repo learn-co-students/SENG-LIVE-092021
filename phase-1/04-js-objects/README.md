@@ -14,7 +14,7 @@
 
 ### Warm Up Question
 
-&emsp; 💡 In your own words, what is an array and why is it useful in programming?
+&emsp; 💡 What are the limitations of arrays that objects help us to address?
 
 ### Resources
 
