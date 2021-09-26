@@ -95,6 +95,7 @@
 console.log("------------------------");
 console.log("⬇️ Break Out Activites ⬇️");
 console.log("🚨 Comment Out Lecture Code Above Before Starting 🚨");
+console.log("💡 Use console.log() To Check Answers 💡");
 console.log("------------------------");
 
 // 🚧 Break Out Activity 1: Creating / Reading / Updating DOM Elements
