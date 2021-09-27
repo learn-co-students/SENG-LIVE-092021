@@ -5,14 +5,27 @@
 
 // ✅ Handling Click and Submit Events
      
-  // addEventListener(event, callbackFunction);
+  // document.addEventListener(event, callbackFunction);
 
     // when would we define callbackFunction as an anonymous function instead
     // of as a function reference?
 
       // addEventListener("click", () => console.log("Test"));
         // vs. 
-      // addEventListener("click", doSomething);
+        
+        // const pokeForm = document.getElementById("poke-form");
+
+        // function doSomething(e) {
+        //   e.preventDefault();
+          // ...
+          // ...
+          
+          // create a new pokemon object
+          
+          // update the DOM to contain a new pokeCard w/ info
+        // }
+
+        // pokeForm.addEventListener("submit", (e) => doSomething(e));
 
 // ✅ .preventDefault()
 
@@ -70,6 +83,7 @@ console.log("------------------------");
 		];
 
     const makeEl = el => document.createElement(el);
+    
     const pokeContainer = document.getElementById("poke-container");
 
     // pokeForm = DOM element with ID of "poke-form" => <div id="poke-form"></div>
@@ -132,13 +146,27 @@ console.log("------------------------");
       likeBttn.className = "like-bttn";
       likeBttn.textContent = "♥";
       
+      
+      function someFunction() {
+        return "Hello!";
+      }
+
+      someFunction();
+
+      () => someFunction();
+
+
       // ❗ add likeBttn event listener ❗
+      likeBttn.addEventListener('click', () => addLike(pokemon, likesNum));
+      // likeBttn.addEventListener('click', () => likesNum.textContent = pokemon.likes += 1);
+
 
       // set deleteBtt attributes
       deleteBttn.className = "delete-bttn";
       deleteBttn.textContent = "Delete";
   
       // ❗ add deleteBttn event listener ❗
+      deleteBttn.addEventListener('click', () => deletePoke(pokeCard));
   
       // append DOM elements to pokeCard
       pokeCard.append(pokeImg, pokeName, pokeLikes, likesNum, likeBttn, deleteBttn);
@@ -148,19 +176,35 @@ console.log("------------------------");
     };
 
     function addLike(pokemon, likesNum){
-    //   // ❗ your code here
+      // increment number of pokemon's likes by +1
+      // pokemon.likes = pokemon.likes + 1
+      // pokemon.likes += 1
+      // ++pokemon.likes
+
+      // update the DOM to reflect that new number
+      likesNum.textContent = ++pokemon.likes;
+
+      // some
+      // other
+      // behaviors
     }
 
     function deletePoke(pokeCard){
-    //   // ❗ your code here
+      pokeCard.remove();
+      
+      // e.target.parentNode.remove();
     }
 
-	// ✅ Check Answer: 
-	function init() {
-		pokemons.forEach(renderPokemon);
-	}
+    // function deletePoke(event){
+    //   event.target.parentNode.remove();
+    // }
 
-	init();
+	// ✅ Check Answer: 
+	// function init() {
+	// 	pokemons.forEach(renderPokemon);
+	// }
+
+	// init();
 
 // 🚧 Break Out Activity 2: Handling Submit Events
 
@@ -187,14 +231,41 @@ console.log("------------------------");
 
 	// 	💡 Use Chrome Dev Tools to view changes being made to the DOM
   
-    // function createPokemon(){
-    //   // ❗ your code here
-    // }
+    function createPokemon(e){
+      // prevent default behavior of a form
+      e.preventDefault();
+    
+      // gather input value
+      // let pokeName = document.getElementById('name-input').value;
+      let pokeName = pokeForm.querySelector('#name-input').value;
+
+      // console.log();
+    
+      let lastPokemonId = pokemons.slice(-1)[0].id;
+
+      // create new pokemon object
+      let newPokemon = {
+        id: lastPokemonId + 1,
+        // id: pokemons.length + 1,
+        name: pokeName,
+        img: './images/whos_that_pokemon.png',
+        likes: 0,
+      }
+    
+      // add newPokemon object to pokemons
+      pokemons.push(newPokemon);
+
+      // create a new card for new pokemon
+      renderPokemon(newPokemon);
+
+      // clear out form inputs
+      pokeForm.reset();
+    }
 
   // ✅ Check Answer: 
-  // function init() {
-  //   pokemons.forEach(renderPokemon);
-  //   pokeForm.addEventListener('submit', createPokemon)
-  // }
+  function init() {
+    pokemons.forEach(renderPokemon);
+    pokeForm.addEventListener('submit', createPokemon)
+  }
   
-  // init()
+  init()
