@@ -1,0 +1,34 @@
+{
+  "pokemons": [
+    {
+      "id": 1,
+      "name": "bulbasaur",
+      "img": "./images/bulbasaur.png",
+      "likes": 4
+    },
+    {
+      "id": 2,
+      "name": "ivysaur",
+      "img": "./images/bulbasaur.png",
+      "likes": 21
+    },
+    {
+      "id": 3,
+      "name": "venusaur",
+      "img": "./images/bulbasaur.png",
+      "likes": 7
+    },
+    {
+      "id": 4,
+      "name": "charmander",
+      "img": "./images/bulbasaur.png",
+      "likes": 20
+    },
+    {
+      "id": 5,
+      "name": "charmeleon",
+      "img": "./images/bulbasaur.png",
+      "likes": 11
+    }
+  ]
+}
