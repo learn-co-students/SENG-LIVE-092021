@@ -1,25 +1,22 @@
 {
   "pokemons": [
     {
+      "id": 1,
+      "name": "Bulbasaur",
+      "img": "./images/bulbasaur.png",
+      "likes": 0
+    },
+    {
       "id": 2,
       "name": "Ivysaur",
       "img": "./images/ivysaur.png",
-      "likes": 5
+      "likes": 0
     },
     {
       "id": 3,
       "name": "Venusaur",
       "img": "./images/venusaur.png",
       "likes": 0
-    }
-  ],
-  "recently-deleted": [
-    {
-      "id": 1,
-      "name": "Bulbasaur",
-      "img": "./images/bulbasaur.png",
-      "likes": 0,
-      "content": "my item"
     }
   ],
   "comments": [
