@@ -1,12 +1,15 @@
-import BookCard from "./BookCard"
+import Genre from "./Genre";
+import BookCard from "./BookCard";
 
-function BookContainer(){
+
+function BookContainer(props){
+    console.log(props)
     //TODO: Render BookCard dynamically for every book in props
     return(
         <>
-            <BookCard />
-            <BookCard />
-            <BookCard />
+            <Genre genresList={props.genresList}/>
+            {props.booksList.map(book => <BookCard key={book.title} bookData={book}/>)}
+        
         </>
     )
 }

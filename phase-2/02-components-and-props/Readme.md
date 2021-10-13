@@ -8,7 +8,7 @@
 ### Organization
 We want to make sure our code is separated out into distinct sections. Our components should be function-specific and reusable when possible. Additionally, functionality for our logic and our rendering should be in separate components.   
 
-Lets take a look at our wire-frame wire-frame component-diagram   
+Lets take a look at our wireframe wireframe component-diagram   
 
 ![wireframe](./assets/wireframe.png)
 ![component-diagram](./assets/component-diagram.png)

@@ -5,7 +5,7 @@ export const books = [
       author: "Marjin Haverbeke",
       genre: "technical",
       liked: true,
-      image: "https://eloquentjavascript.net/img/cover.jpg",
+
       price: 20,
       reviews: [
         {
