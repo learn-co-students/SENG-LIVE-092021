@@ -12,6 +12,7 @@ Lets take a look at our wire-frame wire-frame component-diagram
 
 ![wireframe](./assets/wireframe.png)
 ![component-diagram](./assets/component-diagram.png)
+![props](./assets/props.png)
 
 Our components should be in a components folder, and our index.js should stay in the root of src since its main responsibility should be to tie our components to the DOM.
 
