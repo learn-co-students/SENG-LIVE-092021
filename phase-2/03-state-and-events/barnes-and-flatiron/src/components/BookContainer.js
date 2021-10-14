@@ -2,10 +2,9 @@ import BookCard from "./BookCard"
 import Genre from "./Genre";
 
 function BookContainer(props){
-    //TODO: Render BookCard dynamically for every book in props
     return(
         <>
-            <Genre genreList={props.genreList}/>
+            {/* <Genre genreList={props.genreList}/> */}
             <div style={{display:"flex", flexWrap:"wrap"}}>
             {props.bookList.map(bookObj => <BookCard book={bookObj}/>)}
             </div>
