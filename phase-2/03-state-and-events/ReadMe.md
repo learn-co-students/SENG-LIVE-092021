@@ -35,6 +35,8 @@ The setter we deconstructed from useState will be used to update the state value
 
 onClick will call setCats and update it from rose to bubbles. 
 
+once setCat is called our component will be rerendered with the new state rendered to the browser 
+
 ```
 const [cats, setCats] = useState('rose')
 
@@ -43,7 +45,6 @@ return(
 )
 ```
 
-```
 
 
 
