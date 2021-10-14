@@ -11,6 +11,17 @@
 State is data controlled in our components that can be dynamic.
 While it doesn't persist without a database, we can use this state to change what's being render on our browser. 
 
+### Where should state be defined?
+To keep the code dry, so state should be defined where it  will reach every component that needs that state.   
+
+For example if only one component needs some state, it should be defined in that component.  
+![local-state](./assets/headerState.png)
+
+
+However if several components share state, state should be defined in the first common ancestor of those components. 
+![shared-state](./assets/bookListState.png)
+
+
 ### UseState
 We hold state using the useState method from react
 
