@@ -60,7 +60,7 @@ return(
 ## Inverse Data flow and Lifting state
 ![inverse-data](./assets/inverseDataFlow.png)
 
-We often have components that share state. In the image above our Form will eventually need access to our bookList in order to add new books to state. While our BookCard needs access to our bookState in order to render the books. Defining state in a higher components lets us share state among components, which helps keep our code DRY. However, getting data back up to a parent component is a little harder than passing props down from a parent to a child.   
+We often have components that share state. In the image above our Form will eventually need access to our bookList in order to add new books to state. While our BookCard and BookDetail needs access to our bookState in order to render the books. Defining state in a higher components lets us share state among components, which helps keep our code DRY. However, getting data back up to a parent component is a little harder than passing props down from a parent to a child.   
 
 In order to "lift" data to a parent component we need to pass the child a "vehicle" to do so. A callback function. If we pass a function down to a child through props, we can invoke that function in a child component and pass it data from that child as an `argument`. That argument will be passed "up" to the parent component where the function was defined. Via scope, this can give us access to the state variable and setState function defined in that parent component.   
 
