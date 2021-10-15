@@ -8,7 +8,7 @@ function BookCard({book:{title,author,price=10,genre,image="https://nnpbeta.wust
             <p>{author}</p>
             <p>${price}</p>
             <p>{genre}</p>
-            <p onClick={handleClick}>{like?'♥':'♡'}</p>
+            <p>'♥'</p>
             <img  style={{width:"200px"}}src={image} />
         </div>
     )
