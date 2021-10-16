@@ -1,12 +1,12 @@
 import BookCard from "./BookCard"
 import Genre from "./Genre";
 
-function BookContainer(props){
+function BookContainer({genreList, bookList, handleGenre, handleLike}){
     return(
         <>
-            {/* <Genre genreList={props.genreList}/> */}
+            <Genre genreList={genreList} handleGenre={handleGenre}/>
             <div style={{display:"flex", flexWrap:"wrap"}}>
-            {props.bookList.map(bookObj => <BookCard book={bookObj}/>)}
+            {bookList.map(bookObj => <BookCard book={bookObj} handleLike={handleLike}/>)}
             </div>
         </>
     )

@@ -1,9 +1,7 @@
-import { genres } from "../data/data"
-
-function Genre({genreList}){
+function Genre({genreList, handleGenre}){
     return(
         <div style={{display:"flex"}}>
-        {genreList.map(genre => <div style={{margin:"auto"}}>{genre.toUpperCase()}</div>)}
+        {genreList.map(genre => <div onClick={() => handleGenre(genre)} style={{margin:"auto"}}>{genre.toUpperCase()}</div>)}
         </div>
     )
 }
