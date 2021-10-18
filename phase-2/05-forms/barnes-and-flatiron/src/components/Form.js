@@ -8,42 +8,42 @@ function Form(){
             type="text"
             name="title"
             aria-label="title"
-            aria-required="true"
+       
             ></input>
             <label>Author</label>
             <input
             type="text"
             name="author"
             aria-label="title"
-            aria-required="true"
+       
             ></input>
             <label>Genre</label>
             <input
             type="text"
             name="genre"
             aria-label="title"
-            aria-required="true"
+       
             ></input>
             <label>Image</label>
             <input
             type="text"
             name="image"
             aria-label="title"
-            aria-required="true"
+       
             ></input>
             <label>Price</label>
             <input
             type="text"
             name="price"
             aria-label="title"
-            aria-required="true"
+       
             ></input>
             <label>Description</label>
             <textarea
             type="text"
             name="description"
             aria-label="title"
-            aria-required="true"
+       
             ></textarea>
             <input
             type="submit"
