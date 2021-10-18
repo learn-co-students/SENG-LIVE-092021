@@ -14,37 +14,30 @@ function Form(){
             <input
             type="text"
             name="author"
-            aria-label="title"
+            aria-label="author"
        
             ></input>
             <label>Genre</label>
             <input
             type="text"
             name="genre"
-            aria-label="title"
+            aria-label="genre"
        
             ></input>
             <label>Image</label>
             <input
             type="text"
             name="image"
-            aria-label="title"
+            aria-label="image"
        
             ></input>
             <label>Price</label>
             <input
             type="text"
             name="price"
-            aria-label="title"
+            aria-label="price"
        
             ></input>
-            <label>Description</label>
-            <textarea
-            type="text"
-            name="description"
-            aria-label="title"
-       
-            ></textarea>
             <input
             type="submit"
             ></input>
