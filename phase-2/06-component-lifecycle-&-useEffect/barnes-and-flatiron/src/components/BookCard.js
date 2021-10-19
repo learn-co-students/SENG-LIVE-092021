@@ -1,5 +1,5 @@
 import {useState} from 'react'
-function BookCard({populateForm, handleLike, book, book:{liked, title,author,price=10,genre,image="https://nnpbeta.wustl.edu/img/bookCovers/genericBookCover.jpg"}}){
+function BookCard({addToCart, populateForm, handleLike, book, book:{liked, title,author,price=10,genre,image="https://nnpbeta.wustl.edu/img/bookCovers/genericBookCover.jpg"}}){
 
 
     return(
@@ -9,6 +9,7 @@ function BookCard({populateForm, handleLike, book, book:{liked, title,author,pri
             <p>${price}</p>
             <p>{genre}</p>
             <p onClick={() => handleLike(book)}>{liked?'♥':'♡'}</p>
+            <button onClick={() => addToCart(book)}>Add To Cart</button>
             <button onClick={() => populateForm(book)}>Edit</button>
             <img  style={{width:"200px"}}src={image} />
         </div>

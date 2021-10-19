@@ -1,8 +1,9 @@
-function Header(props){
+function Header({cart, slogan, storeName}){
     return(
         <>
-            <h1 style={{background:"CadetBlue", padding:"19px"}}>{props.storeName}</h1>
-            <h3>{props.slogan}</h3>
+            <h1 style={{background:"CadetBlue", padding:"19px"}}>{storeName}</h1>
+            <h3>{slogan}</h3>
+            <h3>Cart: {cart.length}</h3>
         </>
     )
 }

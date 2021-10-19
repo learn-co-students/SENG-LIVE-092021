@@ -1,22 +1,9 @@
-import {useState} from 'react'
+import {useEffect} from 'react'
 function Form({formData, handleChange, handleSubmit}){
-    // const [formData, setFormData] = useState({
-    //     title:'',
-    //     author: '',
-    //     genre: '',
-    //     image: '',
-    //     price: '',
-    //     liked: false
-    // }) 
-    // const handleChange = (e) => {
-    //     console.log(e.target.name)
-    //     console.log(e.target.value)
-    //     console.log(formData)
-    //     setFormData({...formData, [e.target.name]: e.target.value})
-    // }
-    //TODO: control the form inputs with local state
- 
-    //TODO: on submit lift the form data to APP
+//unmount
+useEffect(() => {
+    return () => console.log('form goodbye')
+},[])
     
     return(
          <form onSubmit={handleSubmit} style={{display:"flex", flexDirection:"column", width:"400px", margin:"auto"}}>

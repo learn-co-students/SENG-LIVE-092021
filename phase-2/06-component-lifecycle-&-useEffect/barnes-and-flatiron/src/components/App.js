@@ -1,12 +1,16 @@
 //npm
-import {useState} from 'react'
+import {useState, useEffect} from 'react'
 
 import BookContainer from "./BookContainer";
 import Header from "./Header";
 import Form from "./Form";
-import{books, genres} from "../data/data.js"
+
 function App() {
+const [books, setBooks] = useState([])
+const [genres, setGenres] = useState([])
 const [bookList, setBookList] = useState(books)
+const [cart, setCart] = useState([])
+const [visible, setVisible] = useState(true)
 const [formData, setFormData] = useState({
   title:'',
   author: '',
@@ -15,12 +19,44 @@ const [formData, setFormData] = useState({
   price: '',
   liked: false
 }) 
+
+//useEffect  -> fetch (setsState) 
+//during first mount
+useEffect(()=> {
+  fetch("http://localhost:4000/books")
+  .then(res => res.json())
+  .then(data => {
+    setBooks(data)
+    setBookList(data)
+  })
+  fetch("http://localhost:4000/genres")
+  .then(res => res.json())
+  .then(data => setGenres(data))
+},[])
+
+//Cart
+//updating state
+useEffect(() => {
+  if(cart.length > 0){
+    alert(`${cart[cart.length-1].title} was added to cart`)
+  }
+},[cart])
+
+
+
+const addToCart = (book) => {
+  //put book into cart (state)
+  setCart([...cart, book])
+}
+
+
+//Form
+
 const handleChange = (e) => {
   console.log(formData)
   setFormData({...formData, [e.target.name]: e.target.value})
 }
 
-//TODO: On form submit add the new book to the bookList in state
 const handleSubmit = (e) => {
   e.preventDefault()
   setBookList([formData, ...bookList])
@@ -49,12 +85,21 @@ const handleGenre = (genre) => {
   setBookList(books.filter(book => book.genre === genre))
 }
 
+// const visibleHandler = () => {
+//   if(visible){
+//     return <Form formData={formData} handleChange={handleChange} handleSubmit={handleSubmit}/>
+//   } else {
+//     return null
+//   }
+// }
+
   return (
     <div className="App" style={{textAlign:"center"}}>
-      <Header storeName="Barnes and Flatiron" slogan="Live Love Code Bake Repeat"/>
-      <Form formData={formData} handleChange={handleChange} handleSubmit={handleSubmit}/>
+      <Header cart={cart} storeName="Barnes and Flatiron" slogan="Live Love Code Bake Repeat"/>
+      <button onClick={() => setVisible(!visible)}>{visible?"Hide Form":"Show Form"}</button>
+     {visible?<Form formData={formData} handleChange={handleChange} handleSubmit={handleSubmit}/>:null}
       <br/>
-      <BookContainer populateForm={populateForm} bookList={bookList} genreList={genres} handleGenre={handleGenre} handleLike={handleLike}/>
+      <BookContainer addToCart={addToCart} populateForm={populateForm} bookList={bookList} genreList={genres} handleGenre={handleGenre} handleLike={handleLike}/>
     </div>
   );
 }
