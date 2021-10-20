@@ -1,6 +1,8 @@
 import {useState} from 'react'
 function BookCard({addToCart, populateForm, handleLike, book, book:{liked, title,author,price=10,genre,image="https://nnpbeta.wustl.edu/img/bookCovers/genericBookCover.jpg"}}){
-
+//props.book.title
+//props.book.author
+//props.book.genre
 
     return(
         <div style={{border:"solid", width:"300px", margin:"auto", background:"white"}}>
