@@ -1,17 +1,18 @@
 //npm
 import {useState, useEffect} from 'react'
+import { Route, Switch } from 'react-router-dom';
 
 import BookContainer from "./BookContainer";
 import Header from "./Header";
 import Form from "./Form";
 import Cart from "./Cart"
+import BookDetail from "./BookDetail"
 
 function App() {
 const [books, setBooks] = useState([])
 const [genres, setGenres] = useState([])
 const [bookList, setBookList] = useState(books)
 const [cart, setCart] = useState([])
-const [visible, setVisible] = useState(true)
 const [edit, setEdit] = useState(null)
 const [formData, setFormData] = useState({
   title:'',
@@ -150,10 +151,20 @@ const handleGenre = (genre) => {
     <div className="App" style={{textAlign:"center"}}>
       {cart.length > 0?<Cart cart={cart}/>:null}
       <Header cart={cart} storeName="Barnes and Flatiron" slogan="Live Love Code Bake Repeat"/>
-      <button onClick={() => setVisible(!visible)}>{visible?"Hide Form":"Show Form"}</button>
-     {visible?<Form formData={formData} handleChange={handleChange} handleSubmit={edit? handleUpdateBook:handleSubmit}/>:null}
-      <br/>
-      <BookContainer deleteBook={deleteBook} addToCart={addToCart} populateForm={populateForm} bookList={bookList} genreList={genres} handleGenre={handleGenre} handleLike={handleLike}/>
+    <Switch>
+      <Route path="/books/new">
+        <Form formData={formData} handleChange={handleChange} handleSubmit={edit? handleUpdateBook:handleSubmit}/>
+      </Route>
+      <Route path="/books/:id">
+       <BookDetail deleteBook={deleteBook} populateForm={populateForm} handleLike={handleLike}/>
+      </Route>
+      <Route exact path="/books">
+        <BookContainer addToCart={addToCart} bookList={bookList} genreList={genres} handleGenre={handleGenre} handleLike={handleLike}/>
+      </Route>
+      <Route>
+        <div>404</div>
+      </Route>
+    </Switch>
     </div>
   );
 }
