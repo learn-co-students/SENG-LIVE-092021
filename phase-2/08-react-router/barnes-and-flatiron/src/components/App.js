@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react'
 import BookContainer from "./BookContainer";
 import Header from "./Header";
 import Form from "./Form";
+import Cart from "./Cart"
 
 function App() {
 const [books, setBooks] = useState([])
@@ -21,14 +22,7 @@ const [formData, setFormData] = useState({
   liked: false
 }) 
 
-//TODO: Create POST request to add book
 
-//TODO: Create PATCH request to Update book
-
-//TODO: Create Delete request to delete book
-
-//useEffect  -> fetch (setsState) 
-//during first mount
 useEffect(()=> {
   fetch("http://localhost:4000/books")
   .then(res => res.json())
@@ -66,21 +60,7 @@ const patchBooks = (book) => {
   })
   .then(res => res.json())
   .then(data => {
-    console.log(data)
-    //Create a new array with map
-    // const newBookList = bookList.map(bookListBook => {
-    //   if(bookListBook.id === book.id){
-    //     return data
-    //   } else {
-    //      return bookListBook
-    //  }
-    // }
-    // })
-
-    //Finding the index of the book that needs to be updated
-    //We should not mutate state directly 
     const idx = bookList.findIndex(bookListBook => bookListBook.id === data.id)
-    //Copy of our book list
     const bookListCopy = [...bookList]
     bookListCopy[idx] = data
     setBookList(bookListCopy)
@@ -162,9 +142,13 @@ const handleGenre = (genre) => {
   setBookList(books.filter(book => book.genre === genre))
 }
 
-
+//TODO:
+//Use React Router to create client-side routing
+//TODO: Use the SWITCH component to render routes exclusively
+ 
   return (
     <div className="App" style={{textAlign:"center"}}>
+      {cart.length > 0?<Cart cart={cart}/>:null}
       <Header cart={cart} storeName="Barnes and Flatiron" slogan="Live Love Code Bake Repeat"/>
       <button onClick={() => setVisible(!visible)}>{visible?"Hide Form":"Show Form"}</button>
      {visible?<Form formData={formData} handleChange={handleChange} handleSubmit={edit? handleUpdateBook:handleSubmit}/>:null}
