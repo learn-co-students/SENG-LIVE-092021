@@ -33,13 +33,7 @@ def create_pizza
 end 
 
 def pizzas 
-  PIZZAS.each do |pizza|
-    puts ""
-    puts "${pizza[:name]"
-    puts "${pizza[:toppings]"
-    puts "${pizza[:desc]"
-    puts ""
-  end
+
 end
 
 def goodbye
