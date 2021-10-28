@@ -1,9 +1,13 @@
+PIZZAS = []
+
 def init
   puts "Welcome to the lean, mean Pizza Machine App!"
   puts "Tell us your name: "
   user = gets.strip
   puts "Awesome, #{user.capitalize}, What would you like to do?"
-  # need to invoke menu list methods
+  # Need to invoke menu_options
+  menu_options
+  menu_selection
   goodbye
 end 
 
@@ -15,7 +19,6 @@ def menu_options
 end 
 
 def menu_selection
-  # Need to add some control flow based on users menu selection
 end 
 
 def create_pizza
@@ -29,12 +32,16 @@ def create_pizza
   # need to return a pizza hash
 end 
 
-# Currently there is not a method to print the list of created pizzas. In order to complete this:
-# 1. Think about a way to store and save the pizzas a user creates
-# 2. How can this collection be used to print a list of all of the stored pizzas
+def pizzas 
+  PIZZAS.each do |pizza|
+    puts ""
+    puts "${pizza[:name]"
+    puts "${pizza[:toppings]"
+    puts "${pizza[:desc]"
+    puts ""
+  end
+end
 
 def goodbye
   puts "Come back when you get hungry!!!"
 end 
-
-# test
