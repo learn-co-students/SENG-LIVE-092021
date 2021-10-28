@@ -1,0 +1,9 @@
+# This line of code is the shebang line. It is beneficial to include this line because this current file does not have an '.rb' extension, which is used to indicate that a Ruby file is being written. This allows the use of './bin/run' instead of 'ruby bin/run'. Because the rest of the code in this file is also written using Ruby methods, it will allow it to be interpreted as such. You can learn more about the shebang line here https://stackoverflow.com/questions/17447532/what-is-the-use-of-usr-local-bin-ruby-w-at-the-start-of-a-ruby-program/17447589 
+
+#!/usr/bin/env ruby
+
+# require_relative is a method similar to 'import' in JavaScript. It allows calling upon relative files in other files. Here we are requiring the environment file in the config folder.
+require_relative "../config/environment"
+
+# This method is defined inside 'lib/cli' and is invoked as the entry way into the program. 
+init
