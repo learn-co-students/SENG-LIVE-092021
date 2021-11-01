@@ -10,6 +10,7 @@ This is an opportunity to discuss:
 
 - puts
 - local variables
+- strings
 - string interpolation
 
 ```rb

@@ -8,7 +8,7 @@ In this phase, we will:
 - Design an API to handle CRUD actions
 - Communicate with an API using different HTTP verbs
 - Create and present a project with a React frontend and a database-backed API backend
-
+ 
 ### What is Ruby?
 
 "A dynamic, open source programming language with a focus on simplicity and productivity. It has an elegant syntax that is natural to read and easy to write." https://www.ruby-lang.org/en/
