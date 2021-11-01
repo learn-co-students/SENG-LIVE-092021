@@ -1,4 +1,4 @@
-PIZZAS = []
+PIZZAS = [{name: "Pepp in my step", toppings: "pepperoni, jalapeno, black olives", desc: "Get a kick out of this pizza"}, {name: "Jalapen-Pineapples", toppings: "pepperoni, jalapeno, pineapple", desc: "So delicously sweet!"}]
 
 def init
   puts "Welcome to the lean, mean Pizza Machine App!"

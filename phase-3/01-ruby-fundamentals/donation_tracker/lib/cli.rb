@@ -17,6 +17,13 @@ end
 # Print out a statement that will read: "Awesome Joe, what would you like to do?" 
 # `Joe` should be dynamic and return the value of the name variable so that the string prints the name a user inputs upon welcome.  
 
+def greeting
+  puts "Welcome to Donation Tracker"
+  puts "Please enter your name:"
+  name = gets.strip 
+  puts "Awesome #{name}, what would you like to do?"
+end
+
 def menu_list 
   puts "Please select from the following options: "
   puts " Enter '1' to create a new donation!"
@@ -29,7 +36,19 @@ end
 # For a behavior like this control flow can be used to execute certain behaviors based on the selection that was made. Thinking about what we have learned in Ruby so far, how can this be written? What type of statements can be used?
 # Another problem that needs to be solved is maintaining a loop in the program that will allow a user to make multiple selections without getting kicked out of the app. 
 def menu_selection 
-end 
+  input = gets.strip 
+    if input == '1'
+      binding.pry
+      create_donation
+      
+    elsif input == '2'
+      organizations
+    elsif input == 'menu'
+      menu_list
+    else 
+      puts "Looks like something went wrong, please try again: "
+    end
+end  
 
 # org_list will print out a list of the available organizations a user can donate to
 # Currently, all organizations are stored in an array
@@ -48,9 +67,15 @@ def create_donation
   puts "Donation Date:"
   date = gets.strip
   completed = false
+
   # Need to create a hash with the provided values user has entered
   # Store and save the new donation to the collection of donations
-  # Print a confirmation message that reads the new values 
+  new_donation = {
+    organization: organization,
+    amount: amount,
+    date: date,
+    completed: completed
+  }
 end 
 
   # Confirmation will be a method that is invoked after a user submits a new donation. It will read and print the values that were entered by user. 
@@ -65,6 +90,3 @@ end
   def goodbye
     puts "Thank you for your contributions! We hope to see you back soon"
   end
-
-
-end  
