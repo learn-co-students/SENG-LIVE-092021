@@ -1,10 +1,5 @@
 # Object Orientation in Ruby pt. 1
 
-#### Lecture Objectives
-
-- Demonstrate the power of OO in Ruby
-- Demonstrate the essential steps to implementing OO in Ruby
-
 ### Lecture Deliverables
 
 - Create and encapsulate logic for a donation class/instance
@@ -22,17 +17,9 @@
 
 ### Object-Orientation
 
-- In the 1970's, Adele Goldberg (Links to an external site.) and Alan Kay (Links to an external site.) developed an object-oriented language at Xerox PARC called SmallTalk, which was used in the first personal computer.
-- OOP is a type of computer programming language that arose as a solution and response to bigger and more complex code.
-- Everything in Ruby is an object
 - Abstraction, polymorphism, inheritance and encapsulation form four of the main pillars of OOP
-- In Ruby, (almost) everything is an object. Every bit of information and code can be given their own properties and actions(aka methods).
-- Ruby comes with a few types of Objects to get us started, things like:
-- [Integer](https://ruby-doc.org/core-2.5.0/Integer.html)
-- [String](https://ruby-doc.org/core-3.0.2/String.html)
-- [Array](https://ruby-doc.org/core-2.7.0/Array.html)
-
 - What is an object? An object is a combo of data and behaviors
+- In Ruby, (almost) everything is an object. Every bit of information and code can be given their own properties and actions(aka methods).
 
 ### Making Objects
 
@@ -109,7 +96,7 @@ class Donation
     end
 end
 
-donation = Donation.new('American Heart Association', 100.00, Time.now)
+donation = Donation.new('American Heart Association', 100.00, DateTime.now.strftime('%m/%d/%y'))
 binding.pry
 
 # Now try to run: donation.organization
