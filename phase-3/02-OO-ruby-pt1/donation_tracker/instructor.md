@@ -4,7 +4,6 @@
 - OOP is a type of computer programming language that arose as a solution and response to bigger and more complex code. 
 - Everything in Ruby is an object
 - Abstraction, polymorphism, inheritance and encapsulation form four of the main pillars of OOP
-- 
 
 ### Talk about benefits of OO 
     - Separation of responsibilities 
