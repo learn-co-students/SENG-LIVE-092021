@@ -9,9 +9,7 @@ def init
 end 
 
 def greeting 
-  puts "Welcome to the Donation Tracker app! Tell us your name:" 
-  name = gets.strip
-  puts "Awesome #{name}, what would you like to do?"
+  puts "Welcome to the Donation Tracker app! What would you like to do:"
 end
 
 def menu_list 
@@ -28,11 +26,13 @@ def menu_selection
     if input.to_i == 1  
       donation = create_donation 
       DONATIONS << donation
-      read_donation(donation)
+      donation.read_donation # calling an instance method on the instance of donation
     elsif input.to_i == 2 
       organizations
     elsif input == 'menu'
       menu_list
+    elsif input == 'pry'
+      binding.pry
     else 
       puts "Oops...looks like something went wrong. Try again!"
     end
@@ -54,23 +54,12 @@ def create_donation
   organization = gets.strip 
   puts "Donation amount:"
   amount = gets.strip 
-  puts "Donation Date:"
-  date = gets.strip
+  date = DateTime.now.strftime('%m/%d/%y')
+  completed = false
 
-  new_donation = {
-    organization: organization,
-    amount: amount,
-    date: date,
-    completed: false
-  }
+  donation = Donation.new(organization, amount, date, completed)
 end 
 
-  def read_donation donation 
-    puts "Organization: #{donation[:organization]}"
-    puts "Amount: #{donation[:amount]}"
-    puts "Date: #{donation[:date]}"
-    puts "Completed? #{donation[:completed]}"
-  end
 
   def goodbye
     puts "Thank you for your contributions! We hope to see you back soon"

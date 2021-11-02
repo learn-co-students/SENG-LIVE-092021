@@ -1,4 +1,4 @@
-PIZZAS = [{name: "Pepp in my step", toppings: "pepperoni, jalapeno, black olives", desc: "Get a kick out of this pizza"}, {name: "Jalapen-Pineapples", toppings: "pepperoni, jalapeno, pineapple", desc: "So delicously sweet!"}]
+PIZZAS = []
 
 def init
   puts "Welcome to the lean, mean Pizza Machine App!"
@@ -22,7 +22,8 @@ def menu_selection
 
   until input == 'exit'
     if input == '1'
-      create_pizza
+      pizza = create_pizza
+      pizza.details
     elsif input == '2'
       pizzas
     else 
@@ -40,23 +41,18 @@ def create_pizza
   puts "Describe this pizza: "
   desc = gets.strip 
 
-  pizza = {
-    name: name,
-    toppings: toppings,
-    desc: desc
-  }
-
+  pizza = Pizza.new(name, toppings, desc) # pizza instance
+  binding.pry
   PIZZAS << pizza 
-
   pizza
 end 
 
 def pizzas 
   PIZZAS.each do |pizza|
     puts ""
-    puts "name: #{pizza[:name]}"
-    puts "#{pizza[:toppings]}"
-    puts "#{pizza[:desc]}"
+    puts "name: #{pizza.name}"
+    puts "#{pizza.toppings}"
+    puts "#{pizza.desc}"
     puts ""
   end
 end
