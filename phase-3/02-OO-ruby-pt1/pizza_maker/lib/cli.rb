@@ -53,7 +53,6 @@ end
 
 def pizzas 
   PIZZAS.each do |pizza|
-    binding.pry
     puts ""
     puts "name: #{pizza[:name]}"
     puts "#{pizza[:toppings]}"

@@ -2,8 +2,8 @@
 
 For this exercise, the goal is to create a Pizza class
 
-1. Create a pizza class and practice initializing new instances through binding.pry
-2. Define an 'initialize' method that sets the attributes: name, ingredients and desc using instance variables. 
-3. While in pry, create a new pizza instance with a name, ingredients and desc attribute. Run the `.name` method on this new instance. What is the result? Discuss why this is happening and come up with how to solve the current result.(Write out the method, without using a macro)
-4. What type of method is this and why is it necessary? Now create a setter for the name attribute. 
-5. Writing a setter and getter method for each attribute can create a lot of code bloat. Let's refactor these two methods using a macro method that will produce both the setter and getter methods with 1 line of code. 
+1. Refactor the application to using classes and object orientation by implementing a Pizza class. 
+2. A new pizza instance can be initialized with the following attributes: name, toppings and desc.
+3. Refactor code in `cli.rb` to using the class by replacing the pizza hash with a new instance of Pizza, passing in the given values entered by the user. 
+3. Add a `binding.pry` after the new pizza instance and run the `.name` method on the object. What is the result? Discuss why this is happening and come up with how to solve the current result, what is missing?
+4. Create an instance method in the Pizza class `#details` that will print the name, toppings and desc of the instance the method is invoked upon. 
