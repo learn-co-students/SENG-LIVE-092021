@@ -1,13 +1,38 @@
-require 'pry'
+class Pizza
 
-class Pizza 
-    attr_accessor :name, :ingredients, :desc 
+    @@all = []
 
-    def initialize(name, ingredients, desc) # .new
-        self.name = name
-        self.ingredients = ingredients
-        self.desc = desc
-    end 
+    attr_accessor :name, :toppings, :desc
 
-end 
+    def self.all 
+        @@all
+    end
 
+    def self.find_by_name(name)
+        # @@all.find do |pizza| # block parameter 
+        #     pizza.name == name 
+        # end
+        @@all.find { |pizza| pizza.name == name}
+    end
+
+    def initialize(name:, toppings:, desc:) 
+        @name = name 
+        @toppings = toppings 
+        @desc = desc 
+    end
+
+    def save 
+        @@all << self 
+        self
+    end
+
+    def details 
+        puts ""
+        puts "Pizza Details:"
+        puts self.name 
+        puts self.toppings
+        puts self.desc
+        puts ""
+    end
+    
+end

@@ -16,6 +16,7 @@ def menu_list
   puts " Enter '1' to create a new donation!"
   puts " Enter '2' to see a list of the organizations accepting donations"
   puts " Enter 'exit' if you changed your mind and wish to leave the app"
+  puts " Enter 'search' to search by id"
   puts " To see the menu options again, please enter 'menu'"
 end 
 
@@ -29,6 +30,8 @@ def menu_selection
       organizations
     elsif input == 'menu'
       menu_list
+    elsif input == 'search'
+      find_donation_by_id
     elsif input == 'pry'
       binding.pry
     else 
@@ -52,12 +55,24 @@ def create_donation
   organization = gets.strip 
   puts "Donation amount:"
   amount = gets.strip 
-  puts "Enter Date:"
-  date = gets.strip
+  date = DateTime.now.strftime('%m/%d/%y')
   completed = false
 
-  donation = Donation.new(organization, amount, date, completed)
+  Donation.create(
+    completed: completed,
+    organization: organization, 
+    date: date, 
+    amount: amount, 
+  )
 end 
+
+def find_donation_by_id
+  puts "Enter an id number:"
+  id = gets.strip.to_i
+  donation = Donation.find_by_id(id)
+  donation.read_donation
+end
+
 
   def goodbye
     puts "Thank you for your contributions! We hope to see you back soon"
