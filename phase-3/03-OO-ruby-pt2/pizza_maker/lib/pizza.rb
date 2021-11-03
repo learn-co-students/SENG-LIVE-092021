@@ -1,13 +1,20 @@
-require 'pry'
+class Pizza
 
-class Pizza 
-    attr_accessor :name, :ingredients, :desc 
+    attr_accessor :name, :toppings, :desc
 
-    def initialize(name, ingredients, desc) # .new
-        self.name = name
-        self.ingredients = ingredients
-        self.desc = desc
-    end 
+    def initialize(name, toppings, desc) 
+        @name = name 
+        @toppings = toppings 
+        @desc = desc 
+    end
 
-end 
-
+    def details 
+        puts ""
+        puts "Pizza Details:"
+        puts self.name 
+        puts self.toppings
+        puts self.desc
+        puts ""
+    end
+    
+end

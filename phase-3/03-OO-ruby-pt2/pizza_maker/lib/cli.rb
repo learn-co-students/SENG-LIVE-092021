@@ -1,4 +1,5 @@
-PIZZAS = [] 
+PIZZAS = []
+
 def init
   puts "Welcome to the lean, mean Pizza Machine App!"
   puts "Tell us your name: "
@@ -17,18 +18,19 @@ def menu_options
 end 
 
 def menu_selection
-  selection = gets.strip
-  until selection == 'exit'
-    if selection == '1'
-      create_pizza
-    elsif selection == '2'
-      created_pizzas
+  input = gets.strip 
+
+  until input == 'exit'
+    if input == '1'
+      pizza = create_pizza
+      pizza.details
+    elsif input == '2'
+      pizzas
     else 
-      puts "Invalid option. Try again: "
-    end 
-    menu_options
-    selection = gets.strip
-  end 
+      puts "Invalid input"
+    end
+      input = gets.strip
+  end
 end 
 
 def create_pizza
@@ -38,31 +40,21 @@ def create_pizza
   toppings = gets.strip
   puts "Describe this pizza: "
   desc = gets.strip 
-  pizza = {
-    name: name,
-    toppings: toppings,
-    desc: desc
-  }
 
-  pizza_confirmation(pizza) 
+  pizza = Pizza.new(name, toppings, desc)
   PIZZAS << pizza 
-  pizza 
+  pizza
 end 
 
-def pizza_confirmation(pizza)
-  puts "The pizza you created is:"
-  puts "Name: #{pizza[:name]}"
-  puts "Toppings: #{pizza[:toppings]}"
-  puts "Desc: #{pizza[:desc]}"
-end 
-
-def created_pizzas
-  PIZZAS.each do |pizza| 
-    puts "Name: #{pizza[:name]}"
-    puts "Toppings: #{pizza[:toppings]}"
-    puts "Desc: #{pizza[:desc]}"
-  end 
-end 
+def pizzas 
+  PIZZAS.each do |pizza|
+    puts ""
+    puts "name: #{pizza.name}"
+    puts "#{pizza.toppings}"
+    puts "#{pizza.desc}"
+    puts ""
+  end
+end
 
 def goodbye
   puts "Come back when you get hungry!!!"

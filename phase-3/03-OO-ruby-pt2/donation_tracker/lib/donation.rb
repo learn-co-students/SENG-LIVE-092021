@@ -16,10 +16,4 @@ class Donation
         puts "Completed? #{@completed}"
     end
 
-    # by_month
-    # .pending 
-
-
-
-
 end 
