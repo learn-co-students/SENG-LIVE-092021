@@ -2,14 +2,14 @@
 
 ### Lecture Deliverables
 
-- [ ] Refactor code that remembers new donation instances
-    - [ ] Set a class variable `@@all` to an empty array
-    - [ ] Define a `#save` method that will add the new instance to the `@@all` array and return the newly saved instance
-    - [ ] Define a `#create` method that will instantiate and save a method at the same time
-    - [ ] Define a method `.all` that will return the value of `@@ll`
-- [ ] Refactor initialize method to use keyword arguments
-- [ ] Add a new property `id` to donation instances that will increment by 1 every time a new instance is created 
-- [ ] Create a class method `.find_by_id` that accepts an `id` as an argument. The method will find the instance with the given `id`. After a new instance has been created, the `id` can not change
+- [x] Refactor code that remembers new donation instances
+    - [x] Set a class variable `@@all` to an empty array
+    - [x] Define a `#save` method that will add the new instance to the `@@all` array and return the newly saved instance
+    - [x] Define a `#create` method that will instantiate and save a method at the same time
+    - [x] Define a method `.all` that will return the value of `@@ll`
+- [x] Refactor initialize method to use keyword arguments
+- [x] Add a new property `id` to donation instances that will increment by 1 every time a new instance is created 
+- [x] Create a class method `.find_by_id` that accepts an `id` as an argument. The method will find the instance with the given `id`. After a new instance has been created, the `id` can not change
 - [ ] Define a method `.pending` that will return all donations with a completed status of false
 - [ ] BONUS: create a `.complete` method that will update completed status to true if donation was made 2 days ago
 

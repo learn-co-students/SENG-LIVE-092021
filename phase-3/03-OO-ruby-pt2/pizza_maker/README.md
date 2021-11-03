@@ -3,7 +3,7 @@
 For this exercise, the goal is to complete the pizza class by adding some modifications
 
 ### Pizza Class: 
-1. Refactor the initialize method to use keyword arguments. 
+x. Refactor the initialize method to use keyword arguments. 
 2. Create a class variable, @@all. We will use this variable to keep track of the number of new pizzas that are created from the Pizza class. 
 3. Define a class method `.all` that is responsible for reading the class variable `@@all`.
 4. Define a `#save` method that will save each new instance to the class array and return the instance.     

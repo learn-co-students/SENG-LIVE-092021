@@ -1,11 +1,29 @@
 class Pizza
 
+    @@all = []
+
     attr_accessor :name, :toppings, :desc
 
-    def initialize(name, toppings, desc) 
+    def self.all 
+        @@all
+    end
+
+    def self.find_by_name(name)
+        # @@all.find do |pizza| # block parameter 
+        #     pizza.name == name 
+        # end
+        @@all.find { |pizza| pizza.name == name}
+    end
+
+    def initialize(name:, toppings:, desc:) 
         @name = name 
         @toppings = toppings 
         @desc = desc 
+    end
+
+    def save 
+        @@all << self 
+        self
     end
 
     def details 
