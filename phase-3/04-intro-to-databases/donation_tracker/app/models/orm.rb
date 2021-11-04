@@ -1,4 +1,4 @@
-class Donation
+class DonationOrm
 
     attr_accessor :amount, :date, :organization_id 
     attr_reader :id
