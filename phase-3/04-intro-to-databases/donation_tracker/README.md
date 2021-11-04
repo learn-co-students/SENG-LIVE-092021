@@ -35,7 +35,7 @@ No way of remembering the objects. Although there is an `@@all` array that store
 
 Active Record is a pre-built ORM that uses SQL to perform CRUD actions on data in databases. 
 
-![orm](./orm.png)
+<img src="./orm.png" width="500" height="300">
 
 ### What is SQL?
 
@@ -86,7 +86,8 @@ WHERE id = ?;
 - ORM's solve repetition and organization problems
 - Get ready for Active Record!
 
-![tables](./tables.png)
+
+<img src="./tables.png" width="750" height="500">
 
 ### Database vs API
 
