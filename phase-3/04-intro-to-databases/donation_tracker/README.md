@@ -146,7 +146,18 @@ Types of common relationships:
 Currently we are building an app that will allow a donor to make a donation to an organization of their choosing. 
 
 1. What models do we need?
-    - Donation 
+    - Donation
+    - Organization
+    - Donor  
 2. What are the associations between the models?
+    - Donation: belongs_to :donor, belongs_to :organization, join table 
+    - Organization: has_many :donations,  has_many :donors, through :donations 
+    - Donor: has_many :donations, has_many :organizations through :donations
 3. What columns and types will each models respective table need?
+    - donations: amount: integer, date: datetime, completed: boolean, organization_id: integer, donation_id: integer
+    - organizations: name:string
+    - donors: name: string, email: string
 4. What behaviors would we like to provide to each model? 
+    - organization: total amount raised
+
+    - donor: return all orgs donated to
