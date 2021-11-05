@@ -32,3 +32,15 @@ def change
 end
 
 ```
+
+models:
+
+pizza
+    has_many :pizza_toppings, has many toppings, through: pizza toppings 
+
+pizzatopping
+    join table 
+    belongs to pizza
+    belongs to topping
+topping 
+    has_many :pizza_toppings, has many pizzas, through: pizza toppings
