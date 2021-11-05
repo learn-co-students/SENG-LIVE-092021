@@ -1,8 +1,13 @@
-# Lecture Exercise
-
 For this exercise, the goal is to complete the pizza class by adding some modifications
 
-1. The initialize method should take in keyword arguments, and mass assign the attributes.
-2. The class needs to remember its objects
-3. Create a class method that will return the array of all objects, the method should be called `.all`
-4. Create a class method `.find` that will accept a name argument and return the matching pizza instance
+Pizza Class:
+
+1. Refactor the initialize method to use keyword arguments.
+2. Create a class variable, @@all. We will use this variable to keep track of the number of new pizzas that are created from the Pizza class.
+3. Define a class method .all that is responsible for reading the class variable @@all.
+4. Define a #save method that will save each new instance to the class array and return the instance.
+5. Define a method .find_by_name that will accept name as an argument and return a matching pizza instance.
+
+CLI:
+Add a menu option for a user to search a pizza with a given name
+Refactor all code in CLI relying on PIZZAS to using the Pizza.all method
