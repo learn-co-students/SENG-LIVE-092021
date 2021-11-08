@@ -45,14 +45,29 @@ Donation.create(amount: 20.00, date: DateTime.new(2021, 11, 02), organization_id
 #### Using Active Record methods, perform the following actions:
 
 1. Return an array of all donation records
+   - Donation.all
 2. Return Donor with id 2
+   - Donor.find(2) if the record is not found, it throws an error 
+   - Donor.find_by_id(2) or Donor.find_by(id: 2) => if record is not found, it just returns nil 
 3. Return the organization with the name "Feeding America"
+- Organization.find_by_name("Feeding America")
 4. Create a donation using the new method.
 5. Return all organizations alphabetized by name. 
+- Organization.order(:name)
 6. Return all the organizations Grinch has donated to.
+- grinch = Donor.find_by_name("Mr. Grinch")
+- grinch.organizations 
 7. Refactor the `.pending` method defined in the Donations model.
 8. Return the total amount of donations Santa has made.
+- santa = Donor.find_by_name("Santa Baby")
+- santa.donations.sum(:amount)
 9. Return the count of donations made by Charlie Brown.
+- charlie = Donor.find_by_name("Charlie Brown")
+- charlie.donations.count 
 10. Return the name of the first organization Grinch donated to. 
+- grinch = Donor.find_by_name("Mr. Grinch")
+- grinch.organizations.first.name
 11. Create a list of the names of donors that have donated to Red Cross. 
+- red_cross = Organization.find_by_name("American National Red Cross")
+- donors_list = red_cross.donors.map {|donor| donor.name}
 
