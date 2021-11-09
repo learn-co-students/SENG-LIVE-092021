@@ -8,6 +8,8 @@ gem 'activerecord'
 gem 'sinatra-activerecord' 
 gem 'sinatra'
 gem "rack-cors"
+gem "activesupport", "~> 6.1"
+
 
 group :development do
   # Auto-reload the server when files are changed
