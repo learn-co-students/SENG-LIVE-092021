@@ -34,7 +34,7 @@ We will be building a Marketplace application that will allow a user to list a c
 ### Domain Model
 
 <p align="center">
-    <img src="./public/domainmodel.png" width="450" height="300">
+    <img src="./public/domainmodel.png" width="750" height="500">
 </p>
 
 #### User
