@@ -86,10 +86,10 @@ A user can be a seller or buyer
 2. [ ] [Configure CORS](#pt2)
 3. [ ] [Use Rails to generate models: User, Item, Category, CategoryItem](#pt3)
 4. [ ] [Create migrations for the following tables: users, items, categories, category_items](#pt4)
-5. [ ] Add associations to models
-6. [ ] Create some seed data in the `db/seeds.rb`
-7. [ ] Define an index action for each resource
-8. [ ] Define a show action for each resource
+5. [ ] [Add associations to models](#pt5)
+6. [ ] [Create some seed data in the `db/seeds.rb`](#pt6)
+7. [ ] [Define an index action for each resource](#pt7)
+8. [ ] [Define a show action for each resource](#pt8)
 
 ### Create a Rails application named 'marketplace-api'
 
@@ -170,7 +170,7 @@ rails g resource user username email
 ```
 
 ```rb
-rails g resource item name desc:text price:float sold:boolean seller:belongs_to buyer:belongs_to
+rails g resource item name desc:text price:float sold:boolean
 ```
 
 ```rb
@@ -234,5 +234,139 @@ class CreateCategoryItems < ActiveRecord::Migration[6.1]
       t.timestamps
     end
   end
+end
+```
+
+### Add associations to models
+
+<div id='pt5'></div>
+
+```rb
+class CategoryItem < ApplicationRecord
+  belongs_to :category
+  belongs_to :item
+end
+```
+
+```rb
+class Category < ApplicationRecord
+    has_many :category_items
+    has_many :items, through: :category_items
+end
+```
+
+```rb
+class Item < ApplicationRecord
+  belongs_to :seller, class_name: "User", foreign_key: "seller_id"
+  belongs_to :buyer, class_name: "User", foreign_key: "buyer_id", optional: true
+  has_many :category_items
+  has_many :categories, through: :category_items
+end
+```
+
+```rb
+class User < ApplicationRecord
+    has_many :purchased_items, class_name: 'Item', foreign_key: 'buyer_id'
+    has_many :sold_items, class_name: 'Item', foreign_key: 'seller_id'
+end
+
+```
+
+### Create some seed data in the `db/seeds.rb`
+
+<div id='pt6'></div>
+
+```rb
+# Creating users: 
+aisayo = User.create(username: "aisayo", email: "aisayo@123.com")
+bob_is_cool = User.create(username: 'bobiscool', email: 'bobiscool@123.com')
+
+# Creating categories: 
+fishing = Category.create(name: "fishing")
+camping = Category.create(name: "camping")
+womens_clothing = Category.create(name: "womens clothing")
+mens_clothing = Category.create(name: "mens clothing")
+electronics = Category.create(name: "electronics")
+decor = Category.create(name: "decor")
+home = Category.create(name: "home")
+living_room = Category.create(name: "living room")
+
+# Creating items
+fishing_pole = Item.create(name: "fishing pole", desc: "really cool fishing pole!", price: 10.00, seller: aisayo)
+white_t = Item.create(name: "white t", desc: "get hip with this cool shirt", price: 5.00, seller: aisayo)
+round_mirror = Item.create(name: "gold round mirror", desc: "vintage mirror", price: 30.50, seller: bob_is_cool)
+table_lamp = Item.create(name: "marble table lamp", desc: "really cool marble lamp", price: 27.50, seller: bob_is_cool)
+walkman = Item.create(name: "vintage walkman", desc: "go back in time with this music player", price: 5.25, seller: bob_is_cool)
+
+# Creating category_items
+CategoryItem.create(item: fishing_pole, category: fishing)
+CategoryItem.create(item: fishing_pole, category: camping)
+CategoryItem.create(item: white_t, category: womens_clothing)
+CategoryItem.create(item: white_t, category: mens_clothing)
+CategoryItem.create(item: round_mirror, category: decor)
+CategoryItem.create(item: round_mirror, category: home)
+CategoryItem.create(item: round_mirror, category: living_room)
+CategoryItem.create(item: table_lamp, category: decor)
+CategoryItem.create(item: table_lamp, category: living_room)
+CategoryItem.create(item: table_lamp, category: home)
+CategoryItem.create(item: walkman, category: electronics)
+```
+
+### Define an index action for each resource
+
+<div id='pt7'></div>
+
+Index action: retrieve all instances of resource. i.e. `Item.all`
+
+1. Need to define an endpoint `'/items'` in `config/routes.rb`. This can be done in 2 ways
+
+```rb
+get '/items', to: 'items#index'
+```
+or 
+
+```rb
+resources :items, only: [:index]
+```
+
+2. Inside controller, define a method `index` that will return all records serialized in JSON format:
+
+```rb
+class ItemsController < ApplicationController
+
+    def index 
+        items = Item.all 
+        render json: items
+    end
+
+end
+```
+### Define an show action for each resource
+
+<div id='pt8'></div>
+
+1. Need to define an endpoint `'/items/:id'` in `config/routes.rb`. This can be done in 2 ways
+
+```rb
+get '/items/:id', to: 'items#show'
+```
+or 
+
+```rb
+resources :items, only: [:index, :show]
+```
+
+```rb
+class ItemsController < ApplicationController
+
+    def index 
+        items = Item.all 
+        render json: items
+    end
+
+    def show 
+        item = Item.find_by_id(params[:id])
+        render json: item
+    end 
 end
 ```
