@@ -85,7 +85,7 @@ A user can be a seller or buyer
 1. [ ] [Create a Rails application named 'marketplace-api'](#pt1)
 2. [ ] [Configure CORS](#pt2)
 3. [ ] [Use Rails to generate models: User, Item, Category, CategoryItem](#pt3)
-4. [ ] Create migrations for the following tables: users, items, categories, category_items
+4. [ ] [Create migrations for the following tables: users, items, categories, category_items](#pt4)
 5. [ ] Add associations to models
 6. [ ] Create some seed data in the `db/seeds.rb`
 7. [ ] Define an index action for each resource
@@ -164,6 +164,7 @@ end
     </ul>
 </details>
     
+### We will use the resource generator to create 
 ```rb
 rails g resource user username email
 ```
@@ -178,4 +179,60 @@ rails g resource category name
 
 ```rb
 rails g resource category_item category:belongs_to item:belongs_to
+```
+
+### Create migrations for the following tables: users, items, categories, category_items
+
+<div id='pt3'></div>
+
+```rb
+class CreateUsers < ActiveRecord::Migration[6.1]
+  def change
+    create_table :users do |t|
+      t.string :username
+      t.string :email
+      t.timestamps
+    end
+  end
+end
+```
+
+```rb
+class CreateItems < ActiveRecord::Migration[6.1]
+  def change
+    create_table :items do |t|
+      t.string :name
+      t.text :desc
+      t.float :price
+      t.boolean :sold, default: false
+      t.references :seller
+      t.references :buyer
+      t.timestamps
+    end
+  end
+end
+```
+
+```rb
+class CreateCategories < ActiveRecord::Migration[6.1]
+  def change
+    create_table :categories do |t|
+      t.string :name
+
+      t.timestamps
+    end
+  end
+end
+```
+
+```rb
+class CreateCategoryItems < ActiveRecord::Migration[6.1]
+  def change
+    create_table :category_items do |t|
+      t.belongs_to :category, null: false, foreign_key: true
+      t.belongs_to :item, null: false, foreign_key: true
+      t.timestamps
+    end
+  end
+end
 ```
