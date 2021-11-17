@@ -132,28 +132,36 @@ end
 
 <details>
   <summary>rails g controller </summary>
-    <p> - Creates controller in app/controllers</p>
-    <p> - Creates a route in config/routes if actions are provided as arguments <strong>NOTE:</strong> these routes are not useful, will not follow REST convention </p>
+    <ul> 
+        <li> Creates controller in app/controllers</li>
+        <li> Creates a route in config/routes if actions are provided as arguments <strong>NOTE:</strong> these routes are not useful, will not follow REST convention </li>
+    </ul>
 </details>
 
 <details>
   <summary>rails g model</summary>
-    <p> - Creates a model file in app/models</p>
-    <p> - Creates a migration file in db/migrate, will include columns and types if provided as argument</p>
+    <ul> 
+        <li>Creates a model file in app/models</li>
+        <li> Creates a migration file in db/migrate, will include columns and types if provided as argument</li>
+    <ul>
 </details>
 
 <details>
   <summary>rails g migration</summary>
-    <p> - Creates a migration file in db/migrate</p>
-    <p> - Will include columns and types if provided as argument</p>
+    <ul> 
+        <li> Creates a migration file in db/migrate</li>
+        <li> Will include columns and types if provided as argument</li>
+    </ul>
 </details>
   
 <details>
   <summary>rails g resource</summary>
-    <p> - Creates a migration file in db/migrate</p>
-    <p> - Creates a model file in app/models</p>
-    <p> - Creates controller in app/controllers</p>
-    <p> - Creates a route in config/routes if actions are provided as arguments <strong>NOTE:</strong> these routes are not useful, will not follow REST convention</p>
+    <ul>
+        <li> Creates a migration file in db/migrate</li>
+        <li> Creates a model file in app/models</li>
+        <li> Creates controller in app/controllers</li>
+        <li> Creates a route in config/routes if actions are provided as arguments <strong>NOTE:</strong> these routes are not useful, will not follow REST convention</li>
+    </ul>
 </details>
     
 ```rb
