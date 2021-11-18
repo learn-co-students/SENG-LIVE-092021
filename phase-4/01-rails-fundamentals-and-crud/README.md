@@ -205,8 +205,8 @@ class CreateItems < ActiveRecord::Migration[6.1]
       t.text :desc
       t.float :price
       t.boolean :sold, default: false
-      t.references :seller
-      t.references :buyer
+      t.references :seller, foreign_key: { to_table: 'users' }
+      t.references :buyer, foreign_key: { to_table: 'users' }
       t.timestamps
     end
   end
@@ -277,11 +277,11 @@ end
 <div id='pt6'></div>
 
 ```rb
-# Creating users: 
+# Creating users:
 aisayo = User.create(username: "aisayo", email: "aisayo@123.com")
 bob_is_cool = User.create(username: 'bobiscool', email: 'bobiscool@123.com')
 
-# Creating categories: 
+# Creating categories:
 fishing = Category.create(name: "fishing")
 camping = Category.create(name: "camping")
 womens_clothing = Category.create(name: "womens clothing")
@@ -323,7 +323,8 @@ Index action: retrieve all instances of resource. i.e. `Item.all`
 ```rb
 get '/items', to: 'items#index'
 ```
-or 
+
+or
 
 ```rb
 resources :items, only: [:index]
@@ -334,13 +335,14 @@ resources :items, only: [:index]
 ```rb
 class ItemsController < ApplicationController
 
-    def index 
-        items = Item.all 
+    def index
+        items = Item.all
         render json: items
     end
 
 end
 ```
+
 ### Define an show action for each resource
 
 <div id='pt8'></div>
@@ -350,7 +352,8 @@ end
 ```rb
 get '/items/:id', to: 'items#show'
 ```
-or 
+
+or
 
 ```rb
 resources :items, only: [:index, :show]
@@ -359,14 +362,14 @@ resources :items, only: [:index, :show]
 ```rb
 class ItemsController < ApplicationController
 
-    def index 
-        items = Item.all 
+    def index
+        items = Item.all
         render json: items
     end
 
-    def show 
+    def show
         item = Item.find_by_id(params[:id])
         render json: item
-    end 
+    end
 end
 ```
