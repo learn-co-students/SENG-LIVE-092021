@@ -22,7 +22,7 @@
 ### Sinatra vs Rails
 
 <p align="center">
-    <img src="./public/sinatravsrails.png" width="450" height="300">
+    <img src="../public/sinatravsrails.png" width="450" height="300">
 </p>
 
 # App Design:
@@ -34,7 +34,7 @@ We will be building a Marketplace application that will allow a user to list a c
 ### Domain Model
 
 <p align="center">
-    <img src="./public/domainmodel.png" width="750" height="500">
+    <img src="../public/domainmodel.png" width="750" height="500">
 </p>
 
 #### User
@@ -369,7 +369,11 @@ class ItemsController < ApplicationController
 
     def show
         item = Item.find_by_id(params[:id])
-        render json: item
+        if item 
+          render json: item
+        else 
+          render json: { error: "Item not found" }, status: :not_found
+        end 
     end
 end
 ```
