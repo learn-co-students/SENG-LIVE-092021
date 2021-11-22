@@ -183,7 +183,7 @@ rails g resource category_item category:belongs_to item:belongs_to
 
 ### Create migrations for the following tables: users, items, categories, category_items
 
-<div id='pt3'></div>
+<div id='pt4'></div>
 
 ```rb
 class CreateUsers < ActiveRecord::Migration[6.1]
