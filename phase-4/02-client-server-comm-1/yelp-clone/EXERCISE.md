@@ -1,5 +1,8 @@
 # Lecture 2 exercise
 
+Refer to this doc for validations: [Active Record Validations](https://guides.rubyonrails.org/active_record_validations.html)
+
+
 1. [ ] Add the following validations to the models:
 
 - A business must be created with a unique name.
@@ -29,7 +32,7 @@ end
 ```
 3. [ ] Define a route and controller method that will create a new business. Reminder to handle valid or invalid data. 
 
-example:
+example on how to handle valid or invalid data:
 
 ```rb
   if obj.save
@@ -63,4 +66,4 @@ end
 ```
 - Make Postman request again, test errors in byebug console: `user.errors.full_messages`
 - What does the error say? How can this be fixed? 
-- Make the updates in Postman and test to get a successful response.
+- Make the required updates in Postman and send another request that will create a successful response.
