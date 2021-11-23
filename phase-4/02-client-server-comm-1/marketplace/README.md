@@ -72,7 +72,7 @@ When an item is created, must provide a name and price. Price needs to be a doll
 class Item < ApplicationRecord
   ...
 
-  validates :name, presence: :true
+  validates :name, presence: true
   validates :price, presence: true, format: { with: /\A\d+(?:\.\d{0,2})?\z/, message: "Must be dollar amount" }, numericality: { greater_than: 0, less_than: 10000 }
 end
 ```
@@ -85,7 +85,7 @@ When a category is created, name should be present and unique:
 class Category < ApplicationRecord
     ...
 
-    validates :name, presence :true, uniqueness: true
+    validates :name, presence: true, uniqueness: true
 end
 ```
 
