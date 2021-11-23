@@ -15,6 +15,14 @@
 1. [ ] [Add validations to models](#pt1)
 2. [ ] [Configurations before moving forward](#pt2)
 3. [ ] [Define an endpoint responsible for handling a request to create a new resource](#pt3)
+4. [ ] [Handling request on back end in controller](#pt4)
+5. [ ] [BONUS: Handling response on front end](#pt5)
+
+### Frontend to Backend Request Response Flow
+
+<p align="center">
+    <img src="../public/requestresponseflow.png" width="450" height="300">
+</p>
 
 ### Thinking about validations
 
@@ -60,6 +68,14 @@ end
 ```
 
 ### Client to Server Comm
+
+[Rails Status codes](http://www.railsstatuscodes.com/)
+
+Status codes we will use today:
+```rb
+:created # returns a 201 status code
+:unprocessable_entity # returns a 422 status code
+```
 
 <div id='pt2'></div>
 
@@ -129,13 +145,17 @@ How to test:
 
 1. Add byebug to create action
 2. In postman create and send a post request
-3. In byebug: first inspect params, then run `Item.new(params)`
-4. Getting 'forbiddenattributes' error due to Rails security
-5. Need to add strong params
+3. In byebug: first inspect `params`, then run `Item.new(params)`
+4. Getting `*** ActiveModel::ForbiddenAttributesError Exception: ActiveModel::ForbiddenAttributesError` error due to Rails security provided on mass assignment
+5. To resolve this, add strong params
 
 #### Handling request on back end in controller:
 
-1. Need to permit attributes via strong params if we want to use mass assignment
+<div id='pt4'></div>
+
+1. Need to permit attributes via strong params if we want to use mass assignment:
+
+Inside ItemsController, add:
 
 ```rb
 
@@ -147,7 +167,7 @@ private
 
 ```
 
-2. Handle object creation in controller, make sure to add logic to address valid vs invalid data(three ways to do this) and send a serialized response based on result.
+2. Handle object creation in controller, making sure to add logic to address valid vs invalid data(three ways to do this). Respond with JSON:
 
 ```rb
 def create
@@ -180,8 +200,23 @@ rescue ActiveRecord::RecordInvalid => invalid
 end
 ```
 
-Handling response on front end
+### BONUS: Handling response on front end
 
-    Reminder on importance of configuring CORS
+<div id='pt5'></div>
 
-    [Rails Status codes](http://www.railsstatuscodes.com/)
+```js
+...
+.then(resp => {
+    if(resp.ok) {
+      return resp.json()
+    } else {
+      return resp.json().then(errors => Promise.reject(errors))
+    }
+  })
+  .then(groups => {
+    console.log(groups) // happens if resp was ok
+  })
+  .catch(errors => {
+    console.error(errors) // happens if resp was not ok
+  })
+```
