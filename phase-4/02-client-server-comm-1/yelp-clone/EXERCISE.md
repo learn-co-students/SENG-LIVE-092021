@@ -1,5 +1,8 @@
 # Lecture 2 exercise
 
+Refer to this doc for validations: [Active Record Validations](https://guides.rubyonrails.org/active_record_validations.html)
+
+
 1. [ ] Add the following validations to the models:
 
 - A business must be created with a unique name.
