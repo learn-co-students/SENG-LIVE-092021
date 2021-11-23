@@ -28,6 +28,8 @@
 
 <div id='pt1'></div>
 
+Validations are defined inside the model files. 
+
 [Active Record Validations](https://guides.rubyonrails.org/active_record_validations.html)
 
 #### User
@@ -199,6 +201,8 @@ rescue ActiveRecord::RecordInvalid => invalid
   render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
 end
 ```
+
+Repeat these steps for the remainder of the models.
 
 ### BONUS: Handling response on front end
 

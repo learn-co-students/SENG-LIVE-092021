@@ -1,56 +1,66 @@
-# Phase 4 Lecture 1 Exercise
+# Lecture 2 exercise
 
-During the breakout exercises, the goal is to apply the tasks learned in the demo portion of lecture, to build out a Rails application together as a group. There should be a designated individual that will share their screen while the rest of the group will help navigate through each task. This is a great opportunity to solidify understanding of the concepts that have been covered in the lessons and lecture so participation is encouraged for everyone. 
+1. [ ] Add the following validations to the models:
 
-The application that we will build together will be a Yelp clone. 
+- A business must be created with a unique name.
+- A user must be created with a unique username and email.
+- A review must be created with content.
 
-There will be 3 models: User, Review, and Business 
-
-<p align="center">
-    <img src="../public/exercise.png" width="400" height="300">
-</p>
-
-
-### Lesson Deliverables
-
-1. [ ] Create a Rails application named 'yelp-clone':
-```rb
-rails new yelp-clone-api --api --minimal --skip-javascript -T
-```
-
-2. [ ] Configure CORS
-
-- Navigate to `config/initializers/cors.rb` and comment out lines 8-16
-- Change `origins` to `'*'`
+2. [ ] Before moving on, configure application with the following steps:
 
 ```rb
-Rails.application.config.middleware.insert_before 0, Rack::Cors do
-  allow do
-    origins '*'
+inside config/initializers/wrap_parameters.rb
 
-    resource '*',
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head]
-  end
+ActiveSupport.on_load(:action_controller) do
+  wrap_parameters format: []
 end
 ```
 
-- In gemfile, comment back in `gem 'rack-cors'` and run `bundle update`
-
-3. [ ] Use Rails to create the migrations for User, Review, Business that reflects the domain model
-4. [ ] In the models, add associations to reflect relationships between the data 
-5. [ ] Add the following seed data to `db/seeds.rb`. Feel free to create any additional data.
+This will ensure that parameters do not get returned nested under the resource key.
 
 ```rb
-bob = User.create(username: "bobiscool", email: "bobiscool@123.com")
-sam = User.create(username: "samiam", email: "samiam@123.com")
+inside ApplicationController
 
-starbucks = Business.create(name: "Starbucks", category: "cafe", city: "north pole", state: "california", zip_code: 100099)
-mcdonalds = Business.create(name: "McDonalds", category: "fast-food", city: "south pole", state: "california", zip_code: 100099)
-dennys = Business.create(name: "Dennys", category: "diner", city: "los angeles", state: "california", zip_code: 100099)
+private
+
+def current_user
+  User.last
+end
+```
+3. [ ] Define a route and controller method that will create a new business. Reminder to handle valid or invalid data. 
+
+example:
+
+```rb
+  if obj.save
+    render json: obj, status: :created
+  else
+    render json: { error: obj.errors.full_messages }, status: :unprocessable_entity
+  end
+```
+4. [ ] Define a route and controller method that will create a new user. Reminder to handle valid or invalid data.
+
+5. [ ] Define a route and controller method that will create a new review. 
+    - When a new review is created, the foreign key for a user and business must be present due to the requirements enforced on a `belongs_to` association. 
+    - For this we can use the currently logged in user by invoking on the `current_user` method: `current_user.reviews.create(...)` Think about how a `business_id` could be provided. Get creative, there are a few ways to handle this. 
+    - Reminder to handle valid or invalid data.
+
+6. [ ] Run `rails s` and test the following data in Postman:
+
+Make a POST request to `localhost:3000/users`
+```rb 
+User.create(username: "bobiscool", email: "test@123.com")
 ```
 
-7. [ ] Create an index route and controller method for businesses.   
-8. [ ] Create a show route and controller method for businesses.   
-
-
+- What is the result? 
+- Add a `byebug` to create action in UsersController
+```rb
+def create
+    user = User.create(...)
+    byebug
+    ...
+end
+```
+- Make Postman request again, test errors in byebug console: `user.errors.full_messages`
+- What does the error say? How can this be fixed? 
+- Make the updates in Postman and test to get a successful response.
