@@ -21,7 +21,7 @@
 ### Frontend to Backend Request Response Flow
 
 <p align="center">
-    <img src="../public/requestresponseflow.png" width="450" height="300">
+    <img src="../public/requestresponseflow.png" width="750" height="600">
 </p>
 
 ### Thinking about validations
