@@ -66,4 +66,4 @@ end
 ```
 - Make Postman request again, test errors in byebug console: `user.errors.full_messages`
 - What does the error say? How can this be fixed? 
-- Make the updates in Postman and test to get a successful response.
+- Make the required updates in Postman and send another request that will create a successful response.
