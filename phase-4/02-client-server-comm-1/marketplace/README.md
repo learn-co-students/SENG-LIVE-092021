@@ -1,5 +1,25 @@
 # Lecture 2: Client/Server Communication Pt 1
 
+Before we get started, we need to make a minor change to the items table. The sold attribute should be defaulted to false, and currently it is not.
+
+1. Create a migration:
+
+```rb
+rails g migration UpdateSoldInItems
+```
+
+2. Write the following migration:
+
+```rb
+class UpdateSoldInItems < ActiveRecord::Migration[6.1]
+  def change
+    change_column :items, :sold, :boolean, default: false
+  end
+end
+```
+
+3. Run `rails db:migrate` and then `rails db:seed:replant`
+
 ## Lecture Objectives
 
 - Define a POST route
@@ -28,7 +48,7 @@
 
 <div id='pt1'></div>
 
-Validations are defined inside the model files. 
+Validations are defined inside the model files.
 
 [Active Record Validations](https://guides.rubyonrails.org/active_record_validations.html)
 
@@ -74,6 +94,7 @@ end
 [Rails Status codes](http://www.railsstatuscodes.com/)
 
 Status codes we will use today:
+
 ```rb
 :created # returns a 201 status code
 :unprocessable_entity # returns a 422 status code
