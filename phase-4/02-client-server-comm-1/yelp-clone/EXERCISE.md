@@ -32,7 +32,7 @@ end
 ```
 3. [ ] Define a route and controller method that will create a new business. Reminder to handle valid or invalid data. 
 
-example:
+example on how to handle valid or invalid data:
 
 ```rb
   if obj.save
