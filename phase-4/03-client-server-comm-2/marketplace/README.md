@@ -66,10 +66,10 @@ class UsersController < ApplicationController
 end
 ```
 
-#### User can delete their account
+#### User can delete their account if the account belongs to the logged in user
 
-1. What HTTP verb will be used?
-2. What will the path look like?
+1. What HTTP verb will be used? 
+2. What will the path look like? '/users/:id'
 3. What is the controller action?
 4. Are there any dependencies to be concerned about upon destroying this resource?
 
