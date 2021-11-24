@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
 
     def index
-        items = Item.all
+        items = Item.where(sold: false)
         render json: items, except: [:created_at, :updated_at]
     end
 
@@ -22,6 +22,40 @@ class ItemsController < ApplicationController
             render json: { error: item.errors.full_messages}, status: :unprocessable_entity
         end
     end
+
+# # handling a request using a begin/rescue 
+#     def update 
+#         item = Item.find(params[:id])
+#         item.update!(item_params)
+#         render json: item, status: :ok
+
+#     rescue ActiveRecord::RecordNotFound => errors
+#         render json: errors.message, status: :not_found 
+    
+#     rescue ActiveRecord::RecordInvalid => invalid 
+#         render json: invalid.record.errors, status: :unprocessable_entity
+#     end
+
+# handling a request using a begin/rescue rescue_from located in applicationcontroller
+    def update 
+        item = Item.find(params[:id])
+        item.update!(item_params)
+        render json: item, status: :ok
+    end
+
+# handling a request using control flow
+    # def update 
+    #     item = Item.find(params[:id])
+    #     if item 
+    #         if item.update(item_params)
+    #             render json: item, status: :ok
+    #         else 
+    #             render json: item.errors.full_messages, status: :unprocessable_entity
+    #         end 
+    #     else 
+    #         render json: "Item not found", status: :not_found 
+    #     end 
+    # end
 
 private 
 
