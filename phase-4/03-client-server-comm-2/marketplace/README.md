@@ -16,7 +16,7 @@
 ## Lecture Objectives
 
 - Define a DELETE route and controller method to delete a resource
-- Define an UPDATE route and controller method to delete a resource
+- Define an UPDATE route and controller method to update a resource
 - Handle valid and invalid data response in controller
 - Test request/response flow via Postman
 
