@@ -23,10 +23,16 @@ class ItemsController < ApplicationController
         end
     end
 
-    private 
 
-    def item_params
-        params.permit(:name, :desc, :price)
-    end 
+# strong params 
 
+private 
+
+def item_params
+    params.permit(:name, :desc, :price)
+end 
+
+    # what is the path to create a new item? '/items'
+    # http verb: POST 
+    # controller action: create 
 end

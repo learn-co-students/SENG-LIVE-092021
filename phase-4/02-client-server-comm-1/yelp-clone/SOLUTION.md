@@ -1,51 +1,29 @@
-# Lecture 1 Exercise Solution:
+# Lecture 2 exercise
 
-1. Create a Rails application named 'yelp-clone':
-   run:
+Refer to this doc for validations: [Active Record Validations](https://guides.rubyonrails.org/active_record_validations.html)
 
-```rb
-rails new yelp-clone-api --api --minimal --skip-javascript -T
-```
 
-2. Configure CORS
+1. Add the following validations to the models:
 
-- Navigate to `config/initializers/cors.rb` and comment out lines 8-16
-- Change `origins` to `'*'`
-
-```rb
-Rails.application.config.middleware.insert_before 0, Rack::Cors do
-  allow do
-    origins '*'
-
-    resource '*',
-      headers: :any,
-      methods: [:get, :post, :put, :patch, :delete, :options, :head]
-  end
-end
-```
-
-- In gemfile, comment back in `gem 'rack-cors'` and run `bundle update`
-
-3. Use Rails to create the migrations for User, Review, Business that reflects the domain model:
-
-```rb
-rails g resource review content:text user:belongs_to business:belongs_to
-```
-
-```rb
-rails g resource business name category city state zip_code:integer
-```
-
-```rb
-rails g resource user username email
-```
-
-4. In the models, add associations to reflect relationships between the data:
+- A business must be created with a unique name.
+- A user must be created with a unique username and email.
+- A review must be created with content.
 
 ```rb
 class Business < ApplicationRecord
-    has_many :reviews
+    has_many :reviews 
     has_many :users, through: :reviews
+
+    validates :name, presence: true, uniqueness: true
+end
+```
+
+```rb
+class User < ApplicationRecord
+    has_many :reviews 
+    has_many :businesses, through: :reviews
+
+    validates :username, :email, presence: true, uniqueness: true
 end
 ```
 
@@ -53,61 +31,127 @@ end
 class Review < ApplicationRecord
   belongs_to :user
   belongs_to :business
+
+  validates :content, presence: true
 end
 ```
 
+2. Before moving on, configure application with the following steps:
+
 ```rb
-class User < ApplicationRecord
-    has_many :reviews
-    has_many :businesses, through: :reviews
+inside config/initializers/wrap_parameters.rb
+
+ActiveSupport.on_load(:action_controller) do
+  wrap_parameters format: []
 end
 ```
 
-5. Add the following seed data to `db/seeds.rb`:
+This will ensure that parameters do not get returned nested under the resource key.
 
 ```rb
-bob = User.create(username: "bobiscool", email: "bobiscool@123.com")
-sam = User.create(username: "samiam", email: "samiam@123.com")
+class ApplicationController < ActionController::API
 
-starbucks = Business.create(name: "Starbucks", category: "cafe", city: "north pole", state: "california", zip_code: 100099)
-mcdonalds = Business.create(name: "McDonalds", category: "fast-food", city: "south pole", state: "california", zip_code: 100099)
-dennys = Business.create(name: "Dennys", category: "diner", city: "los angeles", state: "california", zip_code: 100099)
+
+private
+
+    def current_user
+        User.last
+    end
+
+end
+```
+3. Define a route and controller method that will create a new business. Reminder to handle valid or invalid data. 
+
+inside `config/routes.rb`
+
+```rb
+  resources :businesses, only: [:index, :show, :create]
 ```
 
-7. Create an index route and controller method for businesses:
-
-Add to `config/routes.rb`:
+inside `BusinessController`
 
 ```rb
-  resources :businesses, only: [:index]
-```
+    def create
+        business = Business.create(business_params)
+        render json: business, status: :created 
+    rescue ActiveRecord::RecordInvalid => invalid
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity    
+    end
 
-In BusinessesController:
 
-```rb
-    def index
-        businesses = Business.all
-        render json: businesses
+    private 
+
+    def business_params
+        params.permit(:name, :category, :city, :state, :zip_code)
     end
 ```
 
-8. Create a show route and controller method for businesses:
+4. Define a route and controller method that will create a new user. Reminder to handle valid or invalid data.
 
-Add to `config/routes.rb`:
+inside `config/routes.rb`
 
 ```rb
-  resources :businesses, only: [:index, :show]
+  resources :users, only: [:create]
 ```
 
-In BusinessesController:
-
 ```rb
-    def show
-        business = Business.find_by_id(params[:id])
-        if business
-            render json: business
-        else
-            render json: {error: "Business does not exist"}, status_code: :not_found
-        end
+    def create
+        user = User.create(user_params)
+        render json: user, status: :created 
+    rescue ActiveRecord::RecordInvalid => invalid
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity    
+    end
+
+    private
+
+    def user_params 
+        params.permit(:username, :email)
     end
 ```
+
+5. Define a route and controller method that will create a new review. 
+    - When a new review is created, the foreign key for a user and business must be present due to the requirements enforced on a `belongs_to` association. 
+    - For this we can use the currently logged in user by invoking on the `current_user` method: `current_user.reviews.create(...)` Think about how a `business_id` could be provided. Get creative, there are a few ways to handle this. 
+    - Reminder to handle valid or invalid data.
+
+inside `config/routes.rb`
+
+```rb
+    resources :reviews, only: [:create]
+```
+
+```rb
+    def create
+        review = current_user.reviews.create(review_params, business_id: Business.first)
+        render json: review, status: :created 
+    rescue ActiveRecord::RecordInvalid => invalid
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity    
+    end
+
+
+    private 
+
+    def review_params
+        params.permit(:content)
+    end
+```
+
+6. Run `rails s` and test the following data in Postman:
+
+Make a POST request to `localhost:3000/users`
+```rb 
+User.create(username: "bobiscool", email: "test@123.com")
+```
+
+- What is the result? This should render an unprocessible entity status code
+- Add a `byebug` to create action in UsersController
+```rb
+def create
+    user = User.create(...)
+    byebug
+    ...
+end
+```
+- Make Postman request again, test errors in byebug console: `user.errors.full_messages`
+- What does the error say? The error reflects that the data is not unique due to the username already existing. How can this be fixed? Provide a unique username
+- Make the required updates in Postman and send another request that will create a successful response.
