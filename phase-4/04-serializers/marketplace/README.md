@@ -57,11 +57,12 @@ end
   - Return the items `seller` with username and email included.
 
 What does the expected data structure look like when we visit:
-  - `'/categories'`
-  - `'/categories/:id'`
-  - What associations will be included? What associative attributes should be included?
-  - Is there a defined serializer for the association? If not let's create one
-  - Does the serializer require more than one level deep association? If so, how should it be handled?
+
+- `'/categories'`
+- `'/categories/:id'`
+- What associations will be included? What associative attributes should be included?
+- Is there a defined serializer for the association? If not let's create one
+- Does the serializer require more than one level deep association? If so, how should it be handled?
 
 ```json
 {
@@ -79,20 +80,13 @@ What does the expected data structure look like when we visit:
 }
 ```
 
+Create a serializer for category:
+
 ```rb
-class CategoriesController < ApplicationController
-
-    def index
-        categories = Category.all
-        render json: categories, each_serializer: CategorySerializer
-    end
-
-    def show
-        category = Category.find(params[:id])
-        render json: category
-    end
-end
+rails g serializer category
 ```
+
+Add the following code to the serializer:
 
 ```rb
 class CategorySerializer < ActiveModel::Serializer
@@ -101,12 +95,30 @@ class CategorySerializer < ActiveModel::Serializer
 end
 ```
 
+In the controller, for serializing collections, add:
+
+```rb
+class CategoriesController < ApplicationController
+
+    def index
+      categories = Category.all
+      render json: categories, each_serializer: CategorySerializer
+    end
+
+    def show
+      category = Category.find(params[:id])
+      render json: category
+    end
+end
+```
+
 ### Item
 
-    - name, desc, price in 2 decimal format, with a dollar sign at the beginning i.e. `$10.50`
-    - Define a method #sold_status that will return 'sold' if self.sold is true and 'buy now' if false
-    - Return the items seller with username and email included.
-    - Each item should also return a list of associated categories including the name
+- Serialize with: `name`, `desc`, `price`
+- `price` should be in a 2 decimal format, with a dollar sign at the beginning i.e. `$10.50`
+- Define a method `#status` that will return 'sold' if self.sold returns true and 'buy now' if false
+- Return the items `seller` with username and email included.
+- Each item should also return a list of associated `categories` including the name
 
 ```json
 {
@@ -129,25 +141,17 @@ end
 }
 ```
 
-```rb
-class ItemsController < ApplicationController
-    def index
-        items = Item.where(sold: false)
-        render json: items, each_serializer: ItemSerializer
-    end
+Create a serializer for item:
 
-    def show
-        item = Item.find
-        render json: item
-    rescue ActiveRecord::RecordNotFound => error
-      render json: error.message, status: :not_found
-    end
-    ...
+```rb
+rails g serializer item
 ```
+
+Add the following code to the ItemSerializer:
 
 ```rb
 class ItemSerializer < ActiveModel::Serializer
-  attributes :name, :desc, :price, :sold_status
+  attributes :name, :desc, :price, :status
 
   belongs_to :seller
   has_many :categories
@@ -156,7 +160,7 @@ class ItemSerializer < ActiveModel::Serializer
     "$#{'%.2f' % self.object.price}"
   end
 
-  def sold_status
+  def status
     if self.object.sold
       return "Sold"
     end
@@ -166,50 +170,29 @@ class ItemSerializer < ActiveModel::Serializer
 end
 ```
 
-User
-
-Reminder that our user behaves as both a seller and buyer. We can make a request to a user and grab all items that have been purchased or sold.
-
-- Serialize with username and email
-- should return both sold_items and purchased_items
-- Should return a list of all category names user has
-  both sold to and purchased from separately.
-
-we can add the following to serializer
-
 ```rb
-  has_many :sold_categories, serializer: CategorySerializer
-  has_many :purchased_categories, serializer: CategorySerializer
+class ItemsController < ApplicationController
+    def index
+      items = Item.where(sold: false)
+      render json: items, each_serializer: ItemSerializer
+    end
+
+    def show
+      item = Item.find
+      render json: item
+    rescue ActiveRecord::RecordNotFound => error
+      render json: error.message, status: :not_found
+    end
+    ...
 ```
 
-that will result in the following error:
+### User
 
-```rb
-undefined method `sold_categories' for #<User:0x00007faa26a81290>
-```
+Reminder that user can behave as either a seller and/or buyer. When a request to the users index or show is made, serialized data should return all items that have been purchased and/or sold.
 
-This is because when it invokes upon this method, it will also invoke the respective association int he model and currently this association is not defined.
-
-in model:
-
-```rb
-    has_many :sold_categories, :through => :sold_items
-    has_many :purchased_categories, :through => :purchased_items
-```
-
-This will result in the error
-
-```rb
-'ActiveRecord::HasManyThroughSourceAssociationNotFoundError in UsersController#show'
-'Could not find the source association(s) "sold_category" or :sold_categories in model Item. Try 'has_many :sold_categories, :through => :sold_items, :source => <name>'. Is it one of seller, buyer, category_items, or categories?'
-```
-
-fix model to:
-
-```rb
-    has_many :sold_categories, :through => :sold_items, :source => :categories
-    has_many :purchased_categories, :through => :purchased_items, :source => :categories
-```
+- Serialize with `username` and `email`
+- Return a list of both sold_items and purchased_items. These lists should be returned as separate collections.
+- Return a list of the categories as `sold_categories` and `purchased_categories`, with only the category `name` included.
 
 ```json
 {
@@ -307,6 +290,14 @@ fix model to:
 }
 ```
 
+Create a serailizer for user
+
+```rb
+rails g serializer user
+```
+
+Add the following to UserSerializer
+
 ```rb
 class UserSerializer < ActiveModel::Serializer
   attributes :username, :email
@@ -316,6 +307,43 @@ class UserSerializer < ActiveModel::Serializer
   has_many :sold_categories, serializer: CategorySerializer
   has_many :purchased_categories, serializer: CategorySerializer
 end
+```
+
+Run `rails s` and navigate to `/users/1`
+
+This will result in the following error:
+
+```rb
+undefined method `sold_categories' for #<User:0x00007faa26a81290>
+```
+
+This is because when it invokes upon the `sold_categories`, there is an expectation that the user model will also have a reader method `sold_categories`.
+
+Let's fix this by adding the following to the user model:
+
+```rb
+  class User < ApplicationRecord
+  ...
+    has_many :sold_categories, :through => :sold_items
+    has_many :purchased_categories, :through => :purchased_items
+  end
+```
+
+Refresh the server. There will be a new error:
+
+```rb
+'ActiveRecord::HasManyThroughSourceAssociationNotFoundError in UsersController#show'
+'Could not find the source association(s) "sold_category" or :sold_categories in model Item. Try 'has_many :sold_categories, :through => :sold_items, :source => <name>'. Is it one of seller, buyer, category_items, or categories?'
+```
+
+The error arises when the reader method is invoked because ActiveRecord looks for a `sold_categories` or `purchased_categories` table. To reroute to the `categories` table, add a `source:` method to the model association macros:
+
+```rb
+  class User < ApplicationRecord
+  ...
+    has_many :sold_categories, through: :sold_items, source: :categories
+    has_many :purchased_categories, through: :purchased_items, source: :categories
+  end
 ```
 
 ```rb
