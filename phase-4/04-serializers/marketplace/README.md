@@ -50,9 +50,13 @@ end
 ### Category
 
 - Serialize with a `name`
-- Serialize with a list of `items` including: - `name`, `desc`, `price` in 2 decimal format, with a dollar sign at the beginning i.e. `$10.50` , - Define a method `#status` that will return 'sold' if self.sold returns true and 'Buy Now' if false. - Return the items `seller` with username and email included.
+- Serialize with a list of `items` including:
 
-- What does the expected data structure look like when we visit:
+  - `name`, `desc`, `price` in 2 decimal format, with a dollar sign at the beginning i.e. `$10.50`
+  - Define a method `#status` that will return 'sold' if self.sold returns true and 'Buy Now' if false.
+  - Return the items `seller` with username and email included.
+
+What does the expected data structure look like when we visit:
   - `'/categories'`
   - `'/categories/:id'`
   - What associations will be included? What associative attributes should be included?
