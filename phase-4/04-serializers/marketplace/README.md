@@ -120,6 +120,14 @@ end
 - Return the items `seller` with username and email included.
 - Each item should also return a list of associated `categories` including the name
 
+What does the expected data structure look like when we visit:
+
+- `'/items'`
+- `'/items/:id'`
+- What associations will be included? What associative attributes should be included?
+- Is there a defined serializer for the association? If not let's create one
+- Does the serializer require more than one level deep association? If so, how should it be handled?
+
 ```json
 {
   "name": "fishing pole",
@@ -193,6 +201,14 @@ Reminder that user can behave as either a seller and/or buyer. When a request to
 - Serialize with `username` and `email`
 - Return a list of both sold_items and purchased_items. These lists should be returned as separate collections.
 - Return a list of the categories as `sold_categories` and `purchased_categories`, with only the category `name` included.
+
+What does the expected data structure look like when we visit:
+
+- `'/users'`
+- `'/users/:id'`
+- What associations will be included? What associative attributes should be included?
+- Is there a defined serializer for the association? If not let's create one
+- Does the serializer require more than one level deep association? If so, how should it be handled?
 
 ```json
 {
