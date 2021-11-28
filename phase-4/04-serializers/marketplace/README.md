@@ -72,7 +72,7 @@ What does the expected data structure look like when we visit:
     "name": "fishing pole",
     "desc": "really cool fishing pole!",
     "price": "$10.00",
-    "sold_status": "Buy Now",
+    "status": "Buy Now",
     "seller": {
       "username": "aisayo",
       "email": "aisayo@123.com"
@@ -125,7 +125,7 @@ end
   "name": "fishing pole",
   "desc": "really cool fishing pole!",
   "price": "$10.00",
-  "sold_status": "Buy Now",
+  "status": "Buy Now",
   "seller": {
     "username": "aisayo",
     "email": "aisayo@123.com"
@@ -203,37 +203,37 @@ Reminder that user can behave as either a seller and/or buyer. When a request to
       "name": "fishing pole",
       "desc": "really cool fishing pole!",
       "price": "$10.00",
-      "sold_status": "Buy Now"
+      "status": "Buy Now"
     },
     {
       "name": "purple t",
       "desc": "get hip with this cool shirt",
       "price": "$5.00",
-      "sold_status": "Buy Now"
+      "status": "Buy Now"
     },
     {
       "name": "test",
       "desc": "testing",
       "price": "$1.50",
-      "sold_status": "Buy Now"
+      "status": "Buy Now"
     },
     {
       "name": "test",
       "desc": "testing",
       "price": "$1.50",
-      "sold_status": "Buy Now"
+      "status": "Buy Now"
     },
     {
       "name": "test",
       "desc": "testing",
       "price": "$1.50",
-      "sold_status": "Buy Now"
+      "status": "Buy Now"
     },
     {
       "name": "test",
       "desc": "testing",
       "price": "$1.50",
-      "sold_status": "Buy Now"
+      "status": "Buy Now"
     }
   ],
   "purchased_items": [
@@ -241,7 +241,7 @@ Reminder that user can behave as either a seller and/or buyer. When a request to
       "name": "gold round mirror",
       "desc": "vintage mirror",
       "price": "$30.50",
-      "sold_status": "Sold"
+      "status": "Sold"
     }
   ],
   "sold_categories": [
