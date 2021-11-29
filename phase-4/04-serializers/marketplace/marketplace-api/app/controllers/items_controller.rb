@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
 
     def index
         items = Item.where(sold: false)
-        render json: items, except: [:created_at, :updated_at]
+        render json: items, each_serializer: ItemSerializer
     end
 
     def show 
