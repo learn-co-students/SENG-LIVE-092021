@@ -71,7 +71,7 @@ Expected outcome:
 ]
 ```
 
-Navigate to `/businesses` in the browser. What is the response? Why is the collection of businesses not being serialized? HINT: `each_serializer`
+Navigate to `http://localhost:3000/businesses` in the browser. What is the response? Why is the collection of businesses not being serialized? HINT: `each_serializer`
 
 Refresh the page to confirm that data serialization is correct. 
 
