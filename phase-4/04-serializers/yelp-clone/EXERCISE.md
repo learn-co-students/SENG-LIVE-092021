@@ -35,7 +35,7 @@ use the following method to format the
 
 [For a good strftime](https://foragoodstrftime.com/)
 
-# Testing business
+# Testing BusinessSerializer
 
 Expected outcome:
 
