@@ -66,17 +66,23 @@ What does the expected data structure look like when we visit:
 
 ```json
 {
-"name": "fishing",
-"items": [
-  {
-    "name": "fishing pole",
-    "desc": "really cool fishing pole!",
-    "price": "$10.00",
-    "status": "Buy Now",
-    "seller": {
-      "username": "aisayo",
-      "email": "aisayo@123.com"
+  "name": "decor",
+  "items": [
+    {
+      "id": 3,
+      "name": "gold round mirror",
+      "desc": "vintage mirror",
+      "price": "$30.50",
+      "status": "Buy Now"
+    },
+    {
+      "id": 4,
+      "name": "marble table lamp",
+      "desc": "really cool marble lamp",
+      "price": "$27.50",
+      "status": "Buy Now"
     }
+  ]
 }
 ```
 
@@ -101,13 +107,12 @@ In the controller, for serializing collections, add:
 class CategoriesController < ApplicationController
 
     def index
-      categories = Category.all
-      render json: categories, each_serializer: CategorySerializer
+        render json: Category.all, each_serializer: CategorySerializer, include: ['items', 'items.seller']
     end
 
     def show
-      category = Category.find(params[:id])
-      render json: category
+        category = Category.find(params[:id])
+        render json: category, include: ['items', 'items.seller']
     end
 end
 ```
@@ -130,11 +135,13 @@ What does the expected data structure look like when we visit:
 
 ```json
 {
+  "id": 1,
   "name": "fishing pole",
   "desc": "really cool fishing pole!",
   "price": "$10.00",
   "status": "Buy Now",
   "seller": {
+    "id": 1,
     "username": "aisayo",
     "email": "aisayo@123.com"
   },
@@ -365,14 +372,16 @@ The error arises when the reader method is invoked because ActiveRecord looks fo
 ```rb
 class UsersController < ApplicationController
 
+class UsersController < ApplicationController
+
     def index
-      users = User.all
-      render json: users, each_serializer: UserSerializer
+        users = User.all
+        render json: users, each_serializer: UserSerializer, include: ['categories', 'categories.items']
     end
 
     def show
-      user = User.find(params[:id])
-      render json: user
+        user = User.find(params[:id])
+        render json: user
     end
     ...
 ```
