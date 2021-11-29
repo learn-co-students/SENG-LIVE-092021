@@ -36,12 +36,12 @@ render json: category
 # this will invoke upon the CategorySerializer
 ```
 
-To serialize a collection, the `each_serializer` method can be used to pass each instance to the serializer
+To serialize a collection with a custom serializer, the `each_serializer` method can be used to pass each instance to the serializer
 
 ```rb
 def index
   categories = Category.all
-  render json: categories, each_serializer: CategorySerializer
+  render json: categories, each_serializer: CustomSerializer
 end
 ```
 
