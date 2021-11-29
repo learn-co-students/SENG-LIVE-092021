@@ -27,7 +27,7 @@ A review should be serialized with the following:
 - [ ] `content` which is an attribute that belongs to a review.
 - [ ] Return the date the review was created by using the `created_at` attribute in the following format as `post_date`:
 
-use the following method to format the
+Use the following method to format the date. We need to call the following piece of code on the instance that is being serialized. How do we gain access to the instance inside of a serializer instance method?
 
 ```rb
  created_at.strftime("%m/%e/%Y %l:%M%p %Z")
