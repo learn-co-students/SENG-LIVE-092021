@@ -44,14 +44,13 @@ render json: category
 # this will invoke upon the CategorySerializer
 ```
 
-To serialize a collection, the `each_serializer` method can be used to pass each instance to the serializer
+To serialize a collection with a custom serializer, the `each_serializer` method can be used to pass each instance to the serializer
 
 ```rb
 def index
   categories = Category.all
-  render json: categories, each_serializer: CategorySerializer
+  render json: categories, each_serializer: CustomSerializer
 end
-```
 
 ## Serializing the Marketplace app data:
 
@@ -115,12 +114,12 @@ In the controller, for serializing collections, add:
 class CategoriesController < ApplicationController
 
     def index
-        render json: Category.all, each_serializer: CategorySerializer, include: ['items', 'items.seller']
+        render json: Category.all, include: ['items.seller']
     end
 
     def show
         category = Category.find(params[:id])
-        render json: category, include: ['items', 'items.seller']
+        render json: category, include: ['items.seller']
     end
 end
 ```
@@ -197,7 +196,7 @@ end
 class ItemsController < ApplicationController
     def index
       items = Item.where(sold: false)
-      render json: items, each_serializer: ItemSerializer
+      render json: items
     end
 
     def show
@@ -384,7 +383,7 @@ class UsersController < ApplicationController
 
     def index
         users = User.all
-        render json: users, each_serializer: UserSerializer, include: ['categories', 'categories.items']
+        render json: users, include: ['categories.items']
     end
 
     def show
