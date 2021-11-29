@@ -1,30 +1,76 @@
-# Lecture 3 Exercise 
+# Lecture 4 Exercise
 
-Together as a group, implement the following features into the API, carefully thinking through each of the questions necessary to build out an update and delete feature for the Review model. 
+If receiving the following error:
 
-1. [ ] Users can edit an existing review. Make sure that users can only edit the content attribute. 
+```
+Your Ruby version is 2.6.1, but your Gemfile specified 2.7.4
+```
 
-- What HTTP verb is required? 'PATCH' 
-- What will the defined path be? 'reviews/:id'
-- What controller and action is responsible for handling this request? 'reviews#update'
-- What should the strong params include?
+run the command `rvm use 2.7.4`
 
-To complete this exercise:
-1. Create a new review associated with an existing user and business. This can be done in the seeds.rb file or in rails console.
-2. Define a route in `config/routes.rb`
-3. Add the controller method. 
-4. Inside the controller method, make sure to first find the review that needs to be updated. Add control flow to ensure that if the review is not found, a correct response is generated, and if an update occurs, the review is serialized as a JSON response.
+### Business
 
-2. [ ] Users can delete an existing review. 
+Create a `BusinessSerializer` with the command `rails g serializer business`
 
-- What HTTP verb is required? 'delete'
-- What will the defined path be?  'reviews/:id'
-- What controller and action is responsible for handling this request?
-'reviews#destroy'
-- What should the strong params include?
+A business should be serialized with the following:
 
-To complete this exercise:
-1. Define a route in `config/routes.rb`
-2. Add the controller method. 
-3. Inside the controller method, make sure to first find the review that needs to be deleted. Add control flow to ensure that if the review is not found, a correct response is generated. How should a successful delete be handled? Does this type of request require a reponse?
+- [ ] `name` and `category`: These are the attributes that belong to a business object.
+- [ ] The `city`, `state` and `zip_code` should be returned as `location` in the following format: `"Los Angeles, CA 90810"`: The best method to format and return customized data is by using instance methods inside the serializer. Don't forget to add the method to the list of attributes for invoction.
+- [ ] Return a list of reviews including `content`: Consider if this should be added as `:reviews` to the list of attributes, or if a separate serializer concerning review objects should be created.
 
+### Review
+
+Create a `ReviewSerializer` with the command `rails g serializer review`
+
+A review should be serialized with the following:
+
+- [ ] `content` which is an attribute that belongs to a review.
+- [ ] Return the date the review was created by using the `created_at` attribute in the following format as `post_date`:
+
+use the following method to format the
+
+```rb
+ created_at.strftime("%m/%e/%Y %l:%M%p %Z")
+```
+
+[For a good strftime](https://foragoodstrftime.com/)
+
+# Testing business
+
+Expected outcome:
+
+```json
+[
+  {
+    "id": 1,
+    "name": "Starbucks",
+    "category": "cafe",
+    "location": "north pole, california 100099",
+    "reviews": [
+      {
+        "id": 2,
+        "content": "this is a great place!",
+        "post_date": "11/24/2021 9:20PM UTC"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "McDonalds",
+    "category": "fast-food",
+    "location": "south pole, california 100099",
+    "reviews": []
+  },
+  {
+    "id": 3,
+    "name": "Dennys",
+    "category": "diner",
+    "location": "los angeles, california 100099",
+    "reviews": []
+  }
+]
+```
+
+Navigate to `/businesses` in the browser. What is the response? Why is the collection of businesses not being serialized? HINT: `each_serializer`
+
+Refresh the page to confirm that data serialization is correct. 

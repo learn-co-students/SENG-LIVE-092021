@@ -2,7 +2,7 @@ class BusinessesController < ApplicationController
 
     def index 
         businesses = Business.all 
-        render json: businesses
+        render json: businesses, each_serializer: BusinessSerializer
     end
 
     def show 
