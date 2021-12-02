@@ -2,10 +2,10 @@
 
 ### Deliverables
 
-[ ] Add a signup feature to API
-[ ] Add a login feature to API to include authentication
-[ ] Add a users show route that will authenticate a users session on the front end as "/me"
-[ ] Add a logout feature to API
+- [ ] Add a signup feature to API
+- [ ] Add a login feature to API to include authentication
+- [ ] Add a users show route that will authenticate a users session on the front end as "/me"
+- [ ] Add a logout feature to API
 
 ### Important Talking Points
 
