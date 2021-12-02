@@ -1,7 +1,7 @@
 class CategoriesController < ApplicationController
 
     def index 
-        categories = Category.all
+        categories = Category.includes(:items).all
         render json: categories, include: ['items.seller']
     end
 

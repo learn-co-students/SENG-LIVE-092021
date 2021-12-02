@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+    has_secure_password # password=, password_confirmation, authenticate
+
     has_many :purchased_items, class_name: "Item", foreign_key: 'buyer_id', dependent: :destroy
     has_many :sold_items, class_name: "Item", foreign_key: 'seller_id', dependent: :nullify
 
