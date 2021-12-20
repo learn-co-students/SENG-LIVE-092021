@@ -1,3 +1,4 @@
+import ItemsContainer from './items/ItemsContainer'
 function LoggedInApp({ setCurrentUser, currentUser }) {
   const handleLogout = () => {
     setCurrentUser(null);
@@ -6,6 +7,7 @@ function LoggedInApp({ setCurrentUser, currentUser }) {
   return (
     <div>
       Welcome {currentUser.username}!
+      <ItemsContainer />
       <p>
         <button onClick={handleLogout}>Logout</button>
       </p>
